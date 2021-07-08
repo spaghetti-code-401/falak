@@ -1,9 +1,11 @@
 import './css/app.scss'
+import Post from './components/Post'
 
 function App() {
   return (
     <div className="App">
-     <h1>Dev Social App</h1> 
+
+     <Post/>
     </div>
   );
 }
