@@ -1,0 +1,60 @@
+.profile {
+    min-height: 100vh;
+    // height: 600px;
+    width: 570px;
+    margin: auto;
+
+}
+
+.coverAndProfile {
+    text-align: center;
+    position: relative;
+    height: 300px;
+
+    .coverImage {
+        height: 230px;
+        width: 570px;
+        
+     
+    }
+
+    .profileImage {
+        width: 150px;
+        color: lightcoral;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: 150px;
+        border-radius: 75px;
+    }
+
+}
+
+.profileName {
+    text-align: center;
+    height: 80px;
+    // background-color: rgb(211, 185, 185);
+    // height: 200px;
+
+    .name {
+        font-weight: bolder;
+
+    }
+
+    .nickName {
+        font-size: 13px;
+        opacity: .7;
+    }
+}
+
+.profileDescription {
+    font-size: small;
+    height: 80px;
+}
+
+.profileShare {
+
+    width: 500px;
+    background-color: lightcoral;
+}
