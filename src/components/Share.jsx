@@ -1,4 +1,4 @@
-import '../css/share.scss'
+import './share.scss'
 import TransitionsModal from './Modal';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';

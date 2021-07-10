@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/onlineFriends.scss'
+import './onlineFriends.scss'
 
 export default function OnlineFriends() {
     return (

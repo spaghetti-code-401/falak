@@ -1,5 +1,5 @@
-import '../css/profile.scss'
-import Share from './Share'
+import './profile.scss'
+import Share from '../components/Share'
 
 
 const Profile = (props) => {

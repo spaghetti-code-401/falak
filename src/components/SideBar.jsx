@@ -1,7 +1,6 @@
 import React from 'react'
 import OnlineFriends from './OnlineFriends'
-import '../css/sideBar.scss'
-import '../css/onlineFriends.scss'
+import './sideBar.scss'
 
 export default function SideBar() {
     return (

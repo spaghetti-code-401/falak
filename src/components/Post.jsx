@@ -1,5 +1,5 @@
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import '../css/post.scss'
+import './post.scss'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import CommentIcon from '@material-ui/icons/Comment';
 
