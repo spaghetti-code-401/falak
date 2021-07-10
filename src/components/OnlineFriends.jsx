@@ -13,6 +13,26 @@ export default function OnlineFriends() {
           alt=""
         />
         <div className="greenDot"></div>
+        <p className="userName">username ibn flaan</p>
+      </div>
+
+      <div className="onlineFriend">
+        <img
+          className="onlineFriendPic"
+          src="/images/test.jpg"
+          alt=""
+        />
+        <div className="greenDot"></div>
+        <p className="userName">username Shakeeb</p>
+      </div>
+
+      <div className="onlineFriend">
+        <img
+          className="onlineFriendPic"
+          src="/images/test.jpg"
+          alt=""
+        />
+        <div className="greenDot"></div>
         <p className="userName">username</p>
       </div>
     </div>

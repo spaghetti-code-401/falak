@@ -7,8 +7,8 @@ export default function Feed() {
   return (
     <div className="feed glass">
       <Share />
-      <Post />
-      <Post />
+      <Post postImg="/images/2.jpg"/>
+      <Post postImg="/images/3.jpg"/>
       <Post />
     </div>
   )

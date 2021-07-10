@@ -1,7 +1,7 @@
 .onlineFriends {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  padding: 20px;
   margin-bottom: 20px;
 
   .onlineFriendsHeader {
@@ -14,7 +14,7 @@
 .onlineFriend {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 20px;
   
   .onlineFriendPic {
     width: 32px;
@@ -24,6 +24,8 @@
   }
   .userName {
     margin-left: 10px;
+    font-weight: 500;
+    font-size: 14px;
   }
   
   .greenDot {
