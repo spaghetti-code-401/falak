@@ -24,15 +24,29 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  height: 100vh;
+  // background: linear-gradient(-45deg, #eecdc4, #e7bece, #b5d7e4, #c3e7df);
+  position: relative;
 }
 
-body {
-  // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+.background {
+  z-index: -2;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
   background: linear-gradient(-45deg, #000000, #150d24, #051a20, #010f24);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+}
 
-  position: relative;
+.backgroundLight {
+  z-index: -2;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(-45deg, #d3d3d3, #c0b3d8, #a4c7d1, #adbed6);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
 }
 
 @keyframes gradient {
@@ -51,11 +65,13 @@ body {
   height: 100vh;
   width: 100vw;
   z-index: -1;
-  position: fixed;
+  position: absolute;
   canvas {
     // position: absolute;
   }
 }
+
+/////////////// dark theme
 
 .glass {
   /* from top left, to bottom right */
@@ -83,14 +99,33 @@ body {
   // -webkit-backdrop-filter: blur(0.01rem) saturate(200%);
 }
 
-.glass3 {
+/////////////// light theme
+.glassLight {
   /* from top left, to bottom right */
   background: linear-gradient(
     to right bottom,
-    rgba(100, 100, 125, 0.7),
-    rgba(100, 100, 125, 0.3)
-  );
+    rgba(150, 150, 150, 0.7),
+    rgba(150, 150, 150, 0.2)
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   /* the magic words */
-  backdrop-filter: blur(5rem) saturate(100%);
-  -webkit-backdrop-filter: blur(5rem) saturate(100%);
+  backdrop-filter: blur(0.1rem) saturate(200%);
+  -webkit-backdrop-filter: blur(0.1rem) saturate(200%);
+}
+
+.glassLight2 {
+  /* from top left, to bottom right */
+  background: linear-gradient(
+    to right bottom,
+    rgba(200, 200, 200, 0.3),
+    rgba(200, 200, 200, 0.1)
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05)
+  /* the magic words */
+  // backdrop-filter: blur(0.01rem) saturate(200%);
+  // -webkit-backdrop-filter: blur(0.01rem) saturate(200%);
+}
+
+.lightText {
+  color: #000000;
 }

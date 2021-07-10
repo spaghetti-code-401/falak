@@ -13,6 +13,7 @@ import Background from './components/Background';
 function App() {
   return (
     <>
+      <div className="background"></div>
       <Background />
       <Home />
       {/* <SignIn/> */}
