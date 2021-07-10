@@ -8,7 +8,7 @@ const Share = (props) => {
 
     return (
         <section className="share" >
-            <div className="shareWrapper" >
+            <div className="shareWrapper glass2" >
                 <TransitionsModal />
             </div>    
         </section>

@@ -1,34 +1,44 @@
 .shareWrapper {
-    display: flex;
+  display: flex;
+}
 
+.shareImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.shareTextField {
+  color: whitesmoke !important;
 }
 
 .modalCard {
-    h3 {
-        border-bottom: teal 1px solid;
-        padding-bottom: 12px;
-    }
+  h3 {
+    border-bottom: teal 1px solid;
+    padding-bottom: 12px;
+  }
 
-    .avatarIconShare {
-        font-size: 40px;
-        width: 100%;
-        align-items: flex-start;
-    }
+  .avatarIconShare {
+    font-size: 40px;
+    width: 100%;
+    align-items: flex-start;
+  }
 
-    .searchHeaderInput {
-        width: 335px;
-        height: 100px;
-        padding: 0;
-        border: 0;
-      
-    }
+  .searchHeaderInput {
+    width: 335px;
+    height: 100px;
+    padding: 0;
+    border: 0;
+  }
 
-    textarea:focus, input:focus{
-        outline: none;
-       
-    }
+  textarea:focus,
+  input:focus {
+    outline: none;
+  }
 
-    textarea {
-        resize: none;
-    }
+  textarea {
+    resize: none;
+  }
 }
