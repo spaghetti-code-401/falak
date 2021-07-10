@@ -13,12 +13,17 @@ export const Header = () => {
         <SearchOutlined className="headerSearchIcon"/>
         <input type="text" placeholder="search" className="headerSearchInput" />
       </div>
-      <div className="headerIcons">
+      <div className="headerRight">
         <HomeIcon className="homeIcon" />
         <TextsmsIcon className="messageIcon" />
         <p className="logOut">Logout</p>
         {/* <AccountCircleIcon className="avatarIcon" /> */}
         <img src="/images/test.jpg" alt="" className="headerUserImage" />
+        {/* <div className="headerDropdown glass2">
+          <p className="dropdownProfile">Profile</p>
+          <p className="dropdownLogout">Logout</p>
+          <p className="dropdownTheme">Theme</p>
+        </div> */}
       </div>
     </header>
   );

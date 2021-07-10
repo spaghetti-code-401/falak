@@ -60,7 +60,7 @@ body {
   background: linear-gradient(
     to right bottom,
     rgba(75, 75, 75, 0.7),
-    rgba(75, 75, 75, 0.3)
+    rgba(75, 75, 75, 0.2)
   ) !important;
   /* the magic words */
   backdrop-filter: blur(0.1rem) saturate(200%);
@@ -77,4 +77,16 @@ body {
   /* the magic words */
   backdrop-filter: blur(0.1rem) saturate(100%);
   -webkit-backdrop-filter: blur(0.1rem) saturate(100%);
+}
+
+.glass3 {
+  /* from top left, to bottom right */
+  background: linear-gradient(
+    to right bottom,
+    rgba(100, 100, 125, 0.7),
+    rgba(100, 100, 125, 0.3)
+  );
+  /* the magic words */
+  backdrop-filter: blur(5rem) saturate(100%);
+  -webkit-backdrop-filter: blur(5rem) saturate(100%);
 }
