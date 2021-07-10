@@ -1,0 +1,34 @@
+.shareWrapper {
+    display: flex;
+
+}
+
+.modalCard {
+    h3 {
+        border-bottom: teal 1px solid;
+        padding-bottom: 12px;
+    }
+
+    .avatarIconShare {
+        font-size: 40px;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .searchHeaderInput {
+        width: 335px;
+        height: 100px;
+        padding: 0;
+        border: 0;
+      
+    }
+
+    textarea:focus, input:focus{
+        outline: none;
+       
+    }
+
+    textarea {
+        resize: none;
+    }
+}

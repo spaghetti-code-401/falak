@@ -1,0 +1,35 @@
+.share {
+    text-align: center;
+    // height: 100px;
+    .plusPostIcon {
+        font-size: 70px;
+        color: rgb(77, 156, 119);
+    }
+    
+    .shareWrapper {
+        background-color: #35d8a298;
+        height: 85px;
+        width:100%;
+        margin: auto;
+        padding: 18px 20px ;
+        border-radius: 4px;
+        display: flex;
+        .avatarIconShare {
+            font-size: 50px;
+            color: rgb(64, 70, 69);
+        }
+
+        .postTextArea {
+            width: 400px;
+            height: 80px;
+        }
+    
+        
+    }
+}
+
+.shareInput {
+    width: 300px;
+    height: 150px;
+}
+
