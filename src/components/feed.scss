@@ -1,0 +1,9 @@
+.feed {
+  flex: 6;
+  overflow-y: scroll;
+  padding: 30px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  max-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
+}

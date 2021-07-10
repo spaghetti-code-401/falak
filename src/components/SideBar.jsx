@@ -1,13 +1,11 @@
-import React from 'react'
-import OnlineFriends from './OnlineFriends'
-import './sideBar.scss'
+import React from 'react';
+import OnlineFriends from './OnlineFriends';
+import './sideBar.scss';
 
 export default function SideBar() {
-    return (
-        <div className='sideBar glass'>
-            <div className='sideBarWrapper'>
-                <OnlineFriends/>
-            </div>
-        </div>
-    )
+  return (
+    <div className="sideBar glass">
+      <OnlineFriends />
+    </div>
+  );
 }

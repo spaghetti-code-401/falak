@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.glass::-webkit-scrollbar,
+.glass2::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.glass,
+.glass2 {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 * {
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
@@ -12,24 +25,24 @@ body {
 }
 
 body {
-	// background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background: linear-gradient(-45deg,  #000000, #150d24, #051a20, #010f24);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
+  // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, #000000, #150d24, #051a20, #010f24);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
 
   position: relative;
 }
 
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .canvasContainer {
