@@ -2,7 +2,7 @@ import React from 'react'
 import Post from './Post'
 import Share from './Share'
 import './feed.scss'
-import useTheme from '../hooks/useTheme'
+import { useTheme } from '../context/ThemeContext'
 
 export default function Feed() {
   const {glass} = useTheme()
