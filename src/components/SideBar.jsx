@@ -4,7 +4,7 @@ import './sideBar.scss'
 
 export default function SideBar() {
     return (
-        <div className='sideBar'>
+        <div className='sideBar glass'>
             <div className='sideBarWrapper'>
                 <OnlineFriends/>
             </div>

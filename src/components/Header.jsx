@@ -6,7 +6,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export const Header = () => {
     return (
-        <header className="header">
+        <header className="header glass">
             <div className="headerWrapper">
                 <div className="headerLogo" >Social</div>
                 <div className="headerSearch" >
