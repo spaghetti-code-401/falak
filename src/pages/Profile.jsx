@@ -40,9 +40,9 @@ const Profile = (props) => {
             </div>
             
             <div className="shareAndPost">
-                <Share/>
-                <Post />
-
+                {/* <Share/>
+                <Post /> */}
+                <Feed />
             </div>
 
         </div>

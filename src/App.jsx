@@ -15,10 +15,12 @@ function App() {
   const {background} = useTheme()
   return (
     <>
-      <div className={background}></div>
+      <div className={background}>
+
+      </div>
       <Background />
-      {/* <Home /> */}
       <Profile/>
+      {/* <Home /> */}
       {/* <SignIn/> */}
       {/*<SignUp/> */}
       {/* <Profile /> */}
