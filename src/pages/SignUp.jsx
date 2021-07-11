@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/signin_signup.scss'
+import './signin_signup.scss'
 import { Button,TextField  } from '@material-ui/core'
 
 export default function SignUp() {

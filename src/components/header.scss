@@ -1,0 +1,116 @@
+.header {
+  height: 70px;
+  width: 60vw;
+  margin: auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: lightgray;
+  padding: 5px 20px;
+  position: relative;
+  z-index: 5;
+
+  .headerLogo {
+    // flex: 1;
+    font-size: 32px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .headerSearch {
+    // flex: 2.5;
+    // text-align: center;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    width: fit-content;
+    
+    .headerSearchIcon {
+      color: gray;
+      margin-left: 10px;
+    }
+
+    .headerSearchInput {
+      height: 30px;
+      width: 100px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      color: lightgray;
+      background: none;
+      // background-position: 10px 10px;
+      // background-repeat: no-repeat;
+      padding: 12px 20px 12px 10px;
+      transition: 0.4s ease-in-out;
+
+      &:focus {
+        transition: 0.4s ease-in-out;
+        width: 200px;
+        outline: none;
+      }
+
+      &::placeholder {
+        color: gray;
+      }
+    }
+  }
+
+  .headerRight {
+    // flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .homeIcon {
+      font-size: 25px;
+      color: lightgray;
+      // flex: 1;
+      cursor: pointer;
+    }
+
+    .messageIcon {
+      font-size: 22px;
+      color: lightgray;
+      // flex: 1;
+      cursor: pointer;
+    }
+
+    .logout {
+      // flex: 2;
+      // text-align: center;
+      cursor: pointer;
+    }
+
+    .setTheme {
+      cursor: pointer;
+
+      &::selection {
+        background: none;
+        color: none;
+      }
+
+      &::-moz-selection {
+        background: none;
+        color: none;
+      }
+    }
+
+    .headerUserImage {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    // .headerDropdown {
+    //   position: absolute;
+    //   width: 100px;
+    //   right: -100px;
+    //   top: 50px;
+    //   z-index: 1000;
+    // }
+  }
+}

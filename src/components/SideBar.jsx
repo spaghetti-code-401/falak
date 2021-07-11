@@ -1,14 +1,13 @@
-import React from 'react'
-import OnlineFriends from './OnlineFriends'
-import '../css/sideBar.scss'
-import '../css/onlineFriends.scss'
+import React from 'react';
+import { useTheme } from '../context/ThemeContext';
+import OnlineFriends from './OnlineFriends';
+import './sideBar.scss';
 
 export default function SideBar() {
-    return (
-        <div className='sideBar'>
-            <div className='sideBarWrapper'>
-                <OnlineFriends/>
-            </div>
-        </div>
-    )
+  const {glass} = useTheme()
+  return (
+    <div className={`sideBar ${glass}`}>
+      <OnlineFriends />
+    </div>
+  );
 }
