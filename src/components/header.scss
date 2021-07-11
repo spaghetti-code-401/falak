@@ -114,3 +114,14 @@
     // }
   }
 }
+
+
+.searchHeaderInput {
+  color: wheat;
+  &::placeholder {
+    color: gray;
+  }
+  
+}
+
+
