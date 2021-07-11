@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       <div className="homeContainer">
         <Feed />
-        <SideBar />
+        <SideBar user={null} />
       </div>
     </>
   );
