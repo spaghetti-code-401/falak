@@ -17,9 +17,9 @@ function App() {
     <>
       <div className={background}></div>
       <Background />
-      <Home />
+      {/* <Home /> */}
       {/* <SignIn/> */}
-      {/*<SignUp/> */}
+      <SignUp/>
       {/* <Profile /> */}
     </>
   );
