@@ -11,6 +11,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Background from './components/Background';
 import { useTheme } from './context/ThemeContext';
+import Chat from './pages/Chat';
 function App() {
   const {background} = useTheme()
   return (
@@ -19,8 +20,9 @@ function App() {
       <Background />
       {/* <Home /> */}
       {/* <SignIn/> */}
-      <SignUp/>
+      {/* <SignUp/> */}
       {/* <Profile /> */}
+      <Chat/>
     </>
   );
 }
