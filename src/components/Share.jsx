@@ -22,6 +22,7 @@ const Share = (props) => {
 
   async function submitHandler(e) {
     e.preventDefault();
+    if (!postDesc.current.value) return;
     const newPost = {
       userId: user._id,
       desc: postDesc.current.value
@@ -84,7 +85,9 @@ const Share = (props) => {
         )}
 
         <form className="shareBottom" onSubmit={submitHandler}>
-          <label htmlFor="file-upload" className={`shareImageLabel ${lightText}`}>
+          <label
+            htmlFor="file-upload"
+            className={`shareImageLabel ${lightText}`}>
             <ImageIcon type="file" className={`shareImageIcon ${lightText}`} />
             Choose file
             <input
@@ -99,7 +102,7 @@ const Share = (props) => {
             type="submit"
             className={`btnPost ${glass2} ${lightText}`}
             variant="contained"
-            style={{borderRadius: '10px'}}
+            style={{ borderRadius: '10px', textTransform: 'none' }}
             color="default">
             Share
           </Button>

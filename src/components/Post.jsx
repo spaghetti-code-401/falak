@@ -3,35 +3,85 @@ import './post.scss';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import CommentIcon from '@material-ui/icons/Comment';
 import { useTheme } from '../context/ThemeContext';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import usePF from '../hooks/usePF';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { format } from 'timeago.js';
 
-const Post = ({ postImg }) => {
-  const {glass2, lightText} = useTheme()
+const Post = ({ post }) => {
+  const { glass2, lightText } = useTheme();
+  const [like, setLike] = useState(post.likes.length);
+  const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState({});
+  const { user: currentUser } = useAuth();
+  const PF = usePF();
+
+  async function likeHandler() {
+    try {
+      await axios.put(
+        `https://api-social-mern.herokuapp.com/api/posts/${post._id}/like`,
+        { userId: currentUser._id }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  }
+
+  useEffect(() => {
+    setIsLiked(post.likes.includes(currentUser._id));
+  }, [currentUser._id, post.likes]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(
+        `https://api-social-mern.herokuapp.com/api/users?userId=${post.userId}`
+      );
+      // console.log(res.data);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [post.userId]);
+
   return (
     <section className={`postSection ${glass2}`}>
       <div className="postLeft">
-        <img src="/images/test.jpg" alt="" className="postUserImg" />
+        <Link to={`/profile/${user.username}`}>
+          <img
+            src={
+              user.profilePicture
+                ? PF + user.profilePicture
+                : PF + 'person/noAvatar.png'
+            }
+            alt=""
+            className="postUserImg"
+          />
+        </Link>
       </div>
       <div className="postRight">
         <div className="postHeader">
           {/* <AccountCircleIcon className="avatarIconPost" /> */}
           <div className="postHeaderInfo">
-            <p className={`postHeaderUsername ${lightText}`}>Ghazal Familyname</p>
-            <p className={`postHeaderDate ${lightText}`}>2 minutes ago</p>
+            <p className={`postHeaderUsername ${lightText}`}>
+              {user.username}
+            </p>
+            <p className={`postHeaderDate ${lightText}`}>{format(post.createdAt)}</p>
           </div>
         </div>
         <div className="postMain">
           <p className={lightText}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-            distinctio sequi maiores minima, expedita tempore unde ducimus quam
-            incidunt iste omnis atque dolorem,
+            {post?.desc}
           </p>
-          {postImg && <img className={glass2} src={postImg} alt="" />}
+          {post?.img && <img className={glass2} src={PF + post?.img} alt="" />}
         </div>
         <div className="postFooter">
-          <ThumbUpAltIcon className={`postFooterIcon ${lightText}`} />
-          <p className={lightText}>2 likes</p>
-          <CommentIcon className={`postFooterIcon ${lightText}`} />
-          <p className={lightText}>0 comment</p>
+          <ThumbUpAltIcon className={`postFooterIcon ${lightText}`} onClick={likeHandler} />
+          <p className={lightText}>{like}</p>
+          {/* <CommentIcon className={`postFooterIcon ${lightText}`} />
+          <p className={lightText}>0 comment</p> */}
         </div>
       </div>
     </section>
