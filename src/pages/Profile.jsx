@@ -11,10 +11,12 @@ import { useState } from 'react';
 import { useParams } from 'react-router';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useTheme } from '../context/ThemeContext';
 
 const Profile = (props) => {
   const PF = usePF();
   const [user, setUser] = useState();
+  const {glass, glass2, lightText} = useTheme()
 
   // take username from params (we defined it as /:username)
   const { username } = useParams();
@@ -33,7 +35,7 @@ const Profile = (props) => {
       <Header />
 
       <div className="profileContainer">
-        <div className="profileLeft glass">
+        <div className={`profileLeft ${glass}`}>
           <section className="profile ">
             <div className="coverAndProfileImgs">
               <img
@@ -48,13 +50,13 @@ const Profile = (props) => {
               />
             </div>
             <div className="profileNameAndBio">
-              <p className="profileUserName">qais </p>
-              <p className="profileUserBio">Developer saffaaaaaa7</p>
+              <p className={`profileUserName ${lightText}`}>qais </p>
+              <p className={`profileUserBio ${lightText}`}>Developer saffaaaaaa7</p>
             </div>
-            <div className="profileUserInfo glass2">
-              <p>City: Norway</p>
-              <p>From: Philadelphia</p>
-              <p>Relationship: -</p>
+            <div className={`profileUserInfo ${glass2}`}>
+              <p className={`${lightText}`}>City: Norway</p>
+              <p className={`${lightText}`}>From: Philadelphia</p>
+              <p className={`${lightText}`}>Relationship: -</p>
             </div>
           </section>
           <hr className="profileHr" />
