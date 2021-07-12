@@ -31,18 +31,36 @@ export default function Message({ message, own, chattingFriend }) {
   return (
     <div>
       <div className={own ? `message own` : `message`}>
-        <div className="messageLeft">
+        <div className="messageTop">
           {own ? (
-            <img className="messageImg" src={currentUser?.profilePicture ? PF+currentUser.profilePicture : PF+'person/noAvatar.png'} alt="" />
+            <img
+              className="messageImg"
+              src={
+                currentUser?.profilePicture
+                  ? PF + currentUser.profilePicture
+                  : PF + 'person/noAvatar.png'
+              }
+              alt=""
+            />
           ) : (
-            <img className="messageImg" src={chattingFriend?.profilePicture ? PF+chattingFriend.profilePicture : PF+'person/noAvatar.png'} alt="" />
+            <img
+              className="messageImg"
+              src={
+                chattingFriend?.profilePicture
+                  ? PF + chattingFriend.profilePicture
+                  : PF + 'person/noAvatar.png'
+              }
+              alt=""
+            />
           )}
 
-          <div className={glass2}>
-            <p className={`messageContent ${lightText}`}>{message.text}</p>
+          <div className={`messageTextContainer ${glass2}`}>
+            <p className={`messageText ${lightText}`}>{message.text}</p>
+            <p className={`messageDate ${lightText}`}>
+              {format(message.createdAt)}
+            </p>
           </div>
         </div>
-        <div className="messageBottom">{format(message.createdAt)}</div>
       </div>
     </div>
   );

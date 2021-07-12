@@ -1,4 +1,4 @@
-.chatContainer{
+.chatContainer {
   min-width: 900px;
   width: 60vw;
   margin-top: 30px;
@@ -18,4 +18,31 @@
       color: rgba($color: lightgrey, $alpha: 0.5);
     }
   }
+}
+
+.chatForm {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin-top: 20px;
+  gap: 10px;
+}
+.chatInput {
+  border-radius: 20px;
+  flex: 1;
+  color: lightgrey;
+  padding: 10px;
+  &::placeholder {
+    color: gray;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+.chatButton {
+  color: lightgrey;
+  padding: 10px;
+  border-radius: 20px;
 }
