@@ -30,6 +30,7 @@ export default function Feed({ username, profile }) {
     fetchPosts();
   }, [username, user._id]);
   return (
+    // profileFeed class to fix a scrolling issue
     <div className={profile ? 'feed profileFeed' : `feed ${glass}`}>
       {(!username || username === user.username) && <Share />}
       <hr className="feedHr" />
