@@ -1,100 +1,77 @@
-.profile {
-    min-height: 60vh;
-    // height: 600px;
-    width: 100%;
-    margin: auto;
-    border-radius: 35px !important;
-
+.profileContainer {
+  display: flex;
+  width: 60vw;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 30px;
 }
 
-.coverAndProfile {
+.profileLeft {
+  overflow-y: scroll;
+  flex: 5.5;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  min-height: calc(100vh - 100px);
+  height: calc(100vh - 100px);
+}
+
+.profile {
+
+  .coverAndProfileImgs {
     text-align: center;
     position: relative;
     height: 300px;
-
+  
     .coverImage {
-        height: 230px;
-        width: 570px;
-        
-     
+      height: 230px;
+      width: 100%;
+      object-fit: cover;
     }
-
+  
     .profileImage {
-        width: 150px;
-        color: lightcoral;
-        position: absolute;
-        left: 0;
-        right: 0;
-        margin: auto;
-        top: 150px;
-        border-radius: 75px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+  
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      top: 150px;
     }
-
-}
-
-.profileName {
+  }
+  
+  .profileNameAndBio {
     text-align: center;
-    height: 80px;
-    // background-color: rgb(211, 185, 185);
-    // height: 200px;
-
-    .name {
-        font-weight: bolder;
-
-    }
-
-    .nickName {
-        font-size: 13px;
-        opacity: .7;
-    }
-}
-
-.profileDescription {
-    font-size: small;
-    height: 80px;
-    padding-left: 20px;
-}
-
-.profileShare {
-
-    width: 500px;
-    background-color: lightcoral;
-}
-
-
-.profileContainer {
-        width: 60vw;
-        margin-top: 30px;
-      
-        // display: flex;
-        margin-left: auto;
-        margin-right: auto;
-        gap: 30px;
-      
-}
-
-.heroImage {
-   width: 470px;
-   border-radius: 12px;
-   color: white;
-   
-   .coverImage {
-       width: 470px;
-       
-    }
-}
-
-.heroImageAndSideBar{
-    display: flex;
-    justify-content: space-between;
-}
-
-.shareAndPost {
-
-    width: 470px;
-}
+    color: lightgray;
     
-.heroImage .coverImage {
-    width: 470px;
-    border-radius: 12px;
-} 
+    .profileUserName {
+      font-weight: 600;
+      font-size: 30px;
+      margin-top: 10px;
+    }
+    
+    .profileUserBio {
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+  
+  .profileUserInfo {
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    color: lightgray;
+  }
+
+}
+
+.profileHr {
+  margin-top: 20px;
+  width: calc(100% + 40px);
+  transform: translateX(-20px);
+  border: 1px solid rgba(255, 255, 255, .075);
+}

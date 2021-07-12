@@ -6,7 +6,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
-export default function Feed({ username }) {
+export default function Feed({ username, profile }) {
   const { glass } = useTheme();
   const { user } = useAuth();
   const [posts, setPosts] = useState();
@@ -30,7 +30,7 @@ export default function Feed({ username }) {
     fetchPosts();
   }, [username, user._id]);
   return (
-    <div className={`feed ${glass}`}>
+    <div className={profile ? 'feed profileFeed' : `feed ${glass}`}>
       {(!username || username === user.username) && <Share />}
       <hr className="feedHr" />
       {posts && posts.map((p) => (
