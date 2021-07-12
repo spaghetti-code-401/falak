@@ -4,12 +4,18 @@ import './chatSideBar.scss'
 import Conversations from './Conversations'
 import { useTheme } from '../context/ThemeContext';
 
-export default function ChatSideBar() {
-    const {glass} = useTheme()
-    return (
-        <div className={`chatSideBar ${glass}`}>
-          <OnlineFriends />
-          <Conversations/>
-        </div>
-      );
+export default function ChatSideBar({ conversations, setCurrentConversation, onlineUsers }) {
+  const { glass,lightText } = useTheme()
+  return (
+
+    <div className={`chatSideBar ${glass}`}>
+      <OnlineFriends onlineUsers={onlineUsers} />
+      <div className="conversations">
+        <h3 className={`conversationsHeader ${lightText}`}>Conversations:</h3>
+        {conversations.map(c => (
+          <Conversations conversation={c} setCurrentConversation={setCurrentConversation} />
+        ))}
+      </div>
+    </div>
+  );
 }
