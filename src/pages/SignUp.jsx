@@ -1,66 +1,95 @@
-import React from 'react'
-import './signin_signup.scss'
-import { Button,TextField  } from '@material-ui/core'
+import React, { useRef } from 'react';
+import './signin_signup.scss';
+import { Button, TextField } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 export default function SignUp() {
-    return (
+  const username = useRef();
+  const email = useRef();
+  const password = useRef();
+  const passwordAgain = useRef();
+  const history = useHistory();
 
-        <div className="signIn">
-            <div className='signInWrapper'>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-                <div className="signInLeft">
-                    <h1>
-                        Lorem ipsum
-                    </h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nostrum facere quasi ipsum culpa quae pariatur quia recusandae omnis
-                    </p>
-                </div>
-                <div className="signInRight">
-                    <form className="form">
-                        <TextField label="Username" variant="outlined" size="small" className="input" type="text"   />
-                        <TextField label="Email" variant="outlined" size="small" className="input" type="text"   />
-                        <TextField label="Password" variant="outlined" size="small" className="input" type="text"   />
-                        <TextField label="Password Again" variant="outlined" size="small" className="input" type="password"   />
-                        <Button variant="contained" color="primary" className='button'>
-                            Sign Up
-                        </Button>
-                        <p>Already have an account?</p>
-                        <Button variant="contained" color="secondary" className='newAccountButton' >
-                            log In
-                        </Button>
-                    </form>
-                </div>
-            </div>
+    if (passwordAgain.current.value !== password.current.value) {
+      passwordAgain.current.setCustomValidity('Passwords do not match!');
+    } else {
+      const user = {
+        username: username.current.value,
+        email: email.current.value,
+        password: password.current.value
+      };
+      try {
+        await axios.post(
+          'https://api-social-mern.herokuapp.com/api/auth/register',
+          user
+        );
+        // on successful sign up, redirect to sign in
+        history.push('/signin')
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  console.log(password)
+  console.log(passwordAgain)
+
+  return (
+    <div className="signIn">
+      <div className="signInWrapper glass">
+        <div className="signInLeft">
+          <h1>Lorem ipsum</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+            nostrum facere quasi ipsum culpa quae pariatur quia recusandae omnis
+          </p>
         </div>
-        // <div className="signIn">
-        //     <div className='signInWrapper'>
-
-        //         <div className="signInLeft">
-        //             <h1>
-        //                 Lorem ipsum
-        //             </h1>
-        //             <p>
-        //                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nostrum facere quasi ipsum culpa quae pariatur quia recusandae omnis
-        //             </p>
-        //         </div>
-        //         <div className="signInRight">
-        //             <form className="form">
-        //                 <input placeholder="Username"  className="input" type="text"   />
-        //                 <input placeholder="Email"  className="input" type="text"   />
-        //                 <input placeholder="Password"  className="input" type="text"   />
-        //                 <input placeholder="Password Again"  className="input" type="password"   />
-        //                 <button  className='button'>
-        //                     Sign Up
-        //                 </button>
-        //                 <p>Already have an account?</p>
-        //                 <button  className='newAccountButton' >
-        //                     log In
-        //                 </button>
-        //             </form>
-        //         </div>
-        //     </div>
-        // </div>
-         
-    )
+        <div className="signInRight glass2">
+          <form className="form" onSubmit={handleSubmit}>
+            <input
+            ref={username}
+              placeholder="Username"
+              className="input glass2"
+              type="text"
+              required
+            />
+            <input
+            ref={email}
+              required
+              placeholder="Email"
+              className="input glass2"
+              type="email"
+            />
+            <input
+            ref={password}
+              required
+              placeholder="Password"
+              className="input glass2"
+              type="password"
+              minLength="8"
+            />
+            <input
+            ref={passwordAgain}
+              required
+              placeholder="Password Again"
+              className="input glass2"
+              type="password"
+            />
+            <hr className="hr" />
+            <button type="submit" className="button glass2 signUpButton">
+              Sign Up
+            </button>
+          </form>
+          <p>Already have an account?</p>
+          <Link to="/signin">
+            <button className="newAccountButton glass2">log In</button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }

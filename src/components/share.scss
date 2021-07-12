@@ -37,7 +37,21 @@
         border-radius: 50%;
         object-fit: cover;
         cursor: pointer;
-  
+        margin-right: 20px;
+      }
+      .shareInput {
+        background: none;
+        border: none;
+        width: 100%;
+        color: lightgray;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: rgb(167, 167, 167);
+        }
       }
     }
 
@@ -47,13 +61,21 @@
       justify-content: space-between;
 
       .shareImageIcon {
-        color: white;
+        color: lightgray;
         cursor: pointer;
       }
 
       .shareImageLabel {
+        margin-left: 53px;
         color: lightgray;
-        font-size: 10px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .shareImageIcon {
+          margin-right: 10px;
+        }
       }
 
       .btnPost {

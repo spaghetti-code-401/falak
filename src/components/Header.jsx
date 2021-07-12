@@ -5,8 +5,11 @@ import TextsmsIcon from '@material-ui/icons/Textsms';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { SearchOutlined } from '@material-ui/icons';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
+import usePF from '../hooks/usePF'
 
 export const Header = () => {
+  const {user} = useAuth()
   const {
     glass,
     setGlass,
@@ -17,6 +20,7 @@ export const Header = () => {
     background,
     setBackground
   } = useTheme();
+  const PF = usePF()
 
   const handleSetTheme = () => {
     glass === 'glass' ? setGlass('glassLight') : setGlass('glass');
@@ -41,7 +45,7 @@ export const Header = () => {
           setTheme
         </p>
         {/* <AccountCircleIcon className="avatarIcon" /> */}
-        <img src="/images/test.jpg" alt="" className="headerUserImage" />
+        <img src={PF+user.profilePicture} alt="" className="headerUserImage" />
         {/* <div className="headerDropdown glass2">
           <p className="dropdownProfile">Profile</p>
           <p className="dropdownLogout">Logout</p>

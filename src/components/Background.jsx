@@ -10,7 +10,7 @@ import {
 export default function Background() {
   const [rotationZ, setRotationZ] = useState(0);
 
-  console.log(rotationZ)
+  // console.log(rotationZ)
 
   useEffect(() => {
     const rotate = setInterval(() => {
