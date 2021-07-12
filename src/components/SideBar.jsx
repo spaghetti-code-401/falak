@@ -105,7 +105,7 @@ export default function SideBar({ user }) {
             </p>
           </div>
         </div> */}
-        <h4 className={`sidebarTitle ${lightText}`}>Friends</h4>
+        <h4 className={`sidebarTitle ${lightText}`}>Following</h4>
         {!friends.length && (
           <p className={`sidebarNoFriends ${lightText}`}>
             It's lonely in here 😢
@@ -127,7 +127,7 @@ export default function SideBar({ user }) {
                   alt=""
                   className="sidebarFollowingImg"
                 />
-                <p className="sidebarFollowingName">{f.username}</p>
+                <p className={`sidebarFollowingName ${lightText}`}>{f.username}</p>
               </div>
             </Link>
           ))}

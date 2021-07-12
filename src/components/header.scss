@@ -69,11 +69,13 @@
       color: lightgray;
       // flex: 1;
       cursor: pointer;
+      transform: translateY(3px);
     }
-
+    
     .messageIcon {
       font-size: 22px;
       color: lightgray;
+      transform: translateY(4px);
       // flex: 1;
       cursor: pointer;
     }

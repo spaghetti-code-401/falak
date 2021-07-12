@@ -25,11 +25,11 @@ export default function Chat() {
   const [arrivalMessage, setArrivalMessage] = useState([]);
   const scrollRef = useRef();
   const { user } = useAuth();
-  const [chattingFriend, setChattingFriend] = useState(null)
+  const [chattingFriend, setChattingFriend] = useState(null);
   const socket = useRef();
 
   useEffect(() => {
-    socket.current = io('https://falak-socket.herokuapp.com/')
+    socket.current = io('https://falak-socket.herokuapp.com/');
     socket.current.on('getMessage', (data) => {
       console.log('getMessage');
       setArrivalMessage({
@@ -40,13 +40,13 @@ export default function Chat() {
     });
     console.log('IN CHAT COMPONENT');
   }, []);
-  
+
   useEffect(() => {
     arrivalMessage &&
-    currentConversation?.members.includes(arrivalMessage.sender) &&
-    setMessages((prev) => [...prev, arrivalMessage]);
+      currentConversation?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentConversation?.members]);
-  
+
   useEffect(() => {
     socket.current?.emit('addUser', user._id);
     socket.current?.on('getUsers', (socketUsers) => {
@@ -78,13 +78,13 @@ export default function Chat() {
         text: newMessage.current.value
       });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
 
     try {
       const res = await axios.post(`${API}messages`, message);
       setMessages([...messages, res.data]);
-      e.target.reset()
+      e.target.reset();
     } catch (e) {
       console.log(e);
     }
@@ -123,17 +123,17 @@ export default function Chat() {
   }, [messages]);
 
   useEffect(() => {
-    const friendId = currentConversation?.members.find(m => m !== user._id);
+    const friendId = currentConversation?.members.find((m) => m !== user._id);
     const fetchFriendData = async () => {
       try {
         const res = await axios.get(`${API}users?userId=${friendId}`);
-        setChattingFriend(res.data)
+        setChattingFriend(res.data);
       } catch (e) {
         console.log(e);
       }
-    }
+    };
     fetchFriendData();
-  }, [API, currentConversation?.members, user._id])
+  }, [API, currentConversation?.members, user._id]);
 
   return (
     <div>
@@ -168,7 +168,7 @@ export default function Chat() {
           <div
             className={`noConversationContainer messagesContainer ${glass} `}>
             <p className={`noConversationText ${lightText}`}>
-              Open a conversation!
+              Open a conversation 👽
             </p>
           </div>
         )}

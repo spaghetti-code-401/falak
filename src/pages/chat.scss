@@ -6,4 +6,16 @@
   margin-left: auto;
   margin-right: auto;
   gap: 30px;
+
+  .noConversationContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .noConversationText {
+      font-size: 32px;
+      font-weight: 300;
+      color: rgba($color: lightgrey, $alpha: 0.5);
+    }
+  }
 }
