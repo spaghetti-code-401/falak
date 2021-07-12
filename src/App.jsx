@@ -25,7 +25,9 @@ function App() {
   const {user} = useAuth()
   return (
     <>
-      <div className={background}></div>
+      <div className={background}>
+
+      </div>
       <Background />
       <Router>
         <Switch>
