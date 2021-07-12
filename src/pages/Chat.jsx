@@ -25,30 +25,32 @@ export default function Chat() {
   const [arrivalMessage, setArrivalMessage] = useState([]);
   const scrollRef = useRef();
   const { user } = useAuth();
+  const [chattingFriend, setChattingFriend] = useState(null)
   const socket = useRef();
 
   useEffect(() => {
     socket.current = io('https://falak-socket.herokuapp.com/')
-    socket.current?.on('getMessage', (data) => {
-      console.log('received ---- 1');
+    socket.current.on('getMessage', (data) => {
+      console.log('getMessage');
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
         createdAt: Date.now()
       });
     });
-    console.log('received ---- 2');
+    console.log('IN CHAT COMPONENT');
   }, []);
-
+  
   useEffect(() => {
     arrivalMessage &&
-      currentConversation?.members.includes(arrivalMessage.sender) &&
-      setMessages((prev) => [...prev, arrivalMessage]);
+    currentConversation?.members.includes(arrivalMessage.sender) &&
+    setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentConversation?.members]);
-
+  
   useEffect(() => {
     socket.current?.emit('addUser', user._id);
     socket.current?.on('getUsers', (socketUsers) => {
+      console.log('getUsers');
       setOnlineUsers(
         user.following.filter((f) => socketUsers.some((u) => u.userId === f))
       );
@@ -69,11 +71,15 @@ export default function Chat() {
       (member) => member !== user._id
     );
 
-    socket.current?.emit('sendMessage', {
-      senderId: user._id,
-      receiverId: receiverId,
-      text: newMessage.current.value
-    });
+    try {
+      socket.current.emit('sendMessage', {
+        senderId: user._id,
+        receiverId: receiverId,
+        text: newMessage.current.value
+      });
+    } catch (err) {
+      console.log(err)
+    }
 
     try {
       const res = await axios.post(`${API}messages`, message);
@@ -116,6 +122,19 @@ export default function Chat() {
     });
   }, [messages]);
 
+  useEffect(() => {
+    const friendId = currentConversation?.members.find(m => m !== user._id);
+    const fetchFriendData = async () => {
+      try {
+        const res = await axios.get(`${API}users?userId=${friendId}`);
+        setChattingFriend(res.data)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchFriendData();
+  }, [API, currentConversation?.members, user._id])
+
   return (
     <div>
       <Header />
@@ -128,6 +147,7 @@ export default function Chat() {
                   <Message
                     message={m}
                     own={m.sender === user._id ? true : false}
+                    chattingFriend={chattingFriend}
                   />
                 </div>
               ))}

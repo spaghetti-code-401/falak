@@ -15,7 +15,7 @@ export default function SideBar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useAuth();
   const [followed, setFollowed] = useState(false);
-  const API = useAPI()
+  const API = useAPI();
 
   useEffect(() => {
     setFollowed(currentUser.following.includes(user?._id));
@@ -25,9 +25,7 @@ export default function SideBar({ user }) {
     const getFriends = async () => {
       try {
         const friendList = await axios.get(
-          `${API}users/friends/${
-            user ? user?._id : currentUser._id
-          }`
+          `${API}users/friends/${user ? user?._id : currentUser._id}`
         );
         setFriends(friendList.data);
       } catch (err) {
@@ -40,16 +38,14 @@ export default function SideBar({ user }) {
   const handleFollow = async (e) => {
     try {
       if (followed) {
-        await axios.put(
-          `${API}users/${user._id}/unfollow`,
-          { userId: currentUser._id }
-        );
+        await axios.put(`${API}users/${user._id}/unfollow`, {
+          userId: currentUser._id
+        });
         dispatch({ type: 'UNFOLLOW', payload: user._id });
       } else {
-        await axios.put(
-          `${API}users/${user._id}/follow`,
-          { userId: currentUser._id }
-        );
+        await axios.put(`${API}users/${user._id}/follow`, {
+          userId: currentUser._id
+        });
         dispatch({ type: 'FOLLOW', payload: user._id });
       }
     } catch (err) {
@@ -118,9 +114,10 @@ export default function SideBar({ user }) {
         <div className="sidebarFollowing">
           {friends.map((f) => (
             <Link
+              key={f._id}
               to={`/profile/${f.username}`}
               style={{ textDecoration: 'none' }}>
-              <div key={f._id} className="sidebarFollowingPerson">
+              <div className="sidebarFollowingPerson">
                 <img
                   src={
                     f.profilePicture
