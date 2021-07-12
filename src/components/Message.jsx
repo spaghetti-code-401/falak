@@ -8,15 +8,15 @@ import { format } from 'timeago.js'
 import './message.scss'
 
 export default function Message({ message, own }) {
+  const { glass2, lightText } = useTheme();
   const [user, setUser] = useState();
   const PF = usePF();
 
   const { user: currentUser } = useAuth();
   const API = useAPI()
-  const { glass2, lightText } = useTheme();
 
   useEffect(() => {
-    if (own) return;
+    if (message.sender === currentUser._id) return;
     const fetchFriendData = async () => {
       try {
         const res = await axios.get(`${API}users?userId=${message.sender}`);
@@ -26,7 +26,7 @@ export default function Message({ message, own }) {
       }
     }
     fetchFriendData();
-  }, [API, message.sender, own])
+  }, [API, currentUser._id, message.sender])
 
   return (
     <div>

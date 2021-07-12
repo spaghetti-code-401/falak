@@ -9,10 +9,10 @@ const SocketProvider = ({ children }) => {
   const socket = useRef();
 
   useEffect(() => {
-    socket.current = io.connect('https://falak-socket.herokuapp.com/');
+    socket.current = io('https://falak-socket.herokuapp.com/');
   }, []);
 
-  return <SocketContext.Provider value={socket.current}>{children}</SocketContext.Provider>;
+  return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 };
 
 export default SocketProvider;

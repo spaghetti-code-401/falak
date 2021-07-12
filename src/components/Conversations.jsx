@@ -29,7 +29,7 @@ export default function OnlineFriends({ setCurrentConversation, conversation }) 
   return (
     
 
-      <div onClick={() => setCurrentConversation(conversation)} key={conversation._id} className="conversation" >
+      <div onClick={() => setCurrentConversation(conversation)}className="conversation" >
         <img
           className="conversationPic"
           src={user?.profilePicture? PF+user.profilePicture:PF+'person/noAvatar.png'}
