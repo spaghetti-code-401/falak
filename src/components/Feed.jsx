@@ -32,11 +32,13 @@ export default function Feed({ username, profile }) {
   return (
     // profileFeed class to fix a scrolling issue
     <div className={profile ? 'feed profileFeed' : `feed ${glass}`}>
-      {(!username || username === user.username) && <Share />}
-      <hr className="feedHr" />
-      {posts && posts.map((p) => (
-        <Post key={p._id} post={p} />
-      ))}
+      {(!username || username === user.username) && (
+        <>
+          <Share />
+          <hr className="feedHr" />
+        </>
+      )}
+      {posts && posts.map((p) => <Post key={p._id} post={p} />)}
     </div>
   );
 }

@@ -9,7 +9,7 @@ import { Add, Remove } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
 export default function SideBar({ user }) {
-  const { glass } = useTheme();
+  const { glass, glass2, lightText } = useTheme();
   const PF = usePF();
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useAuth();
@@ -23,15 +23,23 @@ export default function SideBar({ user }) {
     const getFriends = async () => {
       try {
         const friendList = await axios.get(
-          `https://api-social-mern.herokuapp.com/api/users/friends/${user?._id}`
+          `https://api-social-mern.herokuapp.com/api/users/friends/${
+            user ? user?._id : currentUser._id
+          }`
         );
-        setFriends(friendList.data);
+        setFriends([
+          ...friendList.data,
+          ...friendList.data,
+          ...friendList.data,
+          ...friendList.data,
+          ...friendList.data
+        ]);
       } catch (err) {
         console.log(err);
       }
     };
     getFriends();
-  }, [user?._id]);
+  }, [currentUser._id, user]);
 
   const handleFollow = async (e) => {
     try {
@@ -55,14 +63,20 @@ export default function SideBar({ user }) {
   };
 
   function HomeSidebar() {
+    console.log(friends);
     return (
       <>
-        <h4 className="rightbarTitle">Online Friends</h4>
-        <ul className="rightbarFriendList">
+        <h4 className={`sidebarTitle ${lightText}`}>Online Friends</h4>
+        {!friends.length && (
+          <p className={`sidebarNoFriendsHome ${lightText}`}>
+            It's lonely in here 😢
+          </p>
+        )}
+        <div className="sidebarFriendList">
           {friends.map((f) => (
             <OnlineFriends key={f._id} user={f} />
           ))}
-        </ul>
+        </div>
       </>
     );
   }
@@ -71,12 +85,14 @@ export default function SideBar({ user }) {
     return (
       <>
         {user.username !== currentUser.username && (
-          <button className="sidebarFollowButton" onClick={handleFollow}>
+          <button
+            className={`sidebarFollowButton ${glass2} ${lightText}`}
+            onClick={handleFollow}>
             {followed ? 'Unfollow' : 'Follow'}
             {followed ? <Remove /> : <Add />}
           </button>
         )}
-        <h4 className="sidebarTitle">User Info</h4>
+        {/* <h4 className="sidebarTitle">User Info</h4>
         <div className="sidebarInfo">
           <div className="sidebarInfoItem">
             <p className="sidebarInfoKey">City: </p>
@@ -96,8 +112,13 @@ export default function SideBar({ user }) {
                 : 'Complicated'}
             </p>
           </div>
-        </div>
-        <h4 className="sidebarTitle">Friends</h4>
+        </div> */}
+        <h4 className={`sidebarTitle ${lightText}`}>Friends</h4>
+        {!friends.length && (
+          <p className={`sidebarNoFriends ${lightText}`}>
+            It's lonely in here 😢
+          </p>
+        )}
         <div className="sidebarFollowing">
           {friends.map((f) => (
             <Link

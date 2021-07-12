@@ -1,20 +1,8 @@
-.onlineFriends {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  margin-bottom: 20px;
-
-  .onlineFriendsHeader {
-    font-weight: 600;
-    font-size: 20px;
-    margin-bottom: 0;
-  }
-}
 
 .onlineFriend {
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-bottom: 20px;
   
   .onlineFriendPic {
     width: 32px;
