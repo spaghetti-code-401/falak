@@ -16,6 +16,7 @@ export default function ChatSideBar({
         <h3 className={`onlineFriendsHeader ${lightText}`}>Online Friends</h3>
         <OnlineFriends onlineUsers={onlineUsers} />
       </div>
+      <hr className="chatSidebarHr" />
       <div className="conversationsContainer">
         <h3 className={`conversationsHeader ${lightText}`}>Conversations</h3>
         {conversations.map((c) => (

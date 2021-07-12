@@ -20,7 +20,7 @@ export default function OnlineFriends({ user }) {
       />
       <div className="greenDot"></div>
       <p className={`onlineFriendUsername ${lightText}`}>
-        {user?.username} username
+        {user?.username}
       </p>
     </div>
     </>
