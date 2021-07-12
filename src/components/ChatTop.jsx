@@ -14,30 +14,6 @@ export default function ChatTop() {
                     <p className={`messageContent ${lightText} ${glass2}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit doloribus dolores, vero deleniti quod vel et! Doloribus..</p>
                 </div>
             </div>
-            <div className='message'>
-                <div className='messageLeft'>
-                    <img src="/images/test.jpg" alt="" />
-                </div>
-                <div className='messageRight'>
-                    <p className={`messageContent ${lightText} ${glass2}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit doloribus dolores, vero deleniti quod vel et! Doloribus..</p>
-                </div>
-            </div>
-            <div className='message'>
-                <div className='messageLeft'>
-                    <img src="/images/test.jpg" alt="" />
-                </div>
-                <div className='messageRight'>
-                    <p className={`messageContent ${lightText} ${glass2}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit doloribus dolores, vero deleniti quod vel et! Doloribus..</p>
-                </div>
-            </div>
-            <div className='message'>
-                <div className='messageLeft'>
-                    <img src="/images/test.jpg" alt="" />
-                </div>
-                <div className='messageRight'>
-                    <p className={`messageContent ${lightText} ${glass2}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit doloribus dolores, vero deleniti quod vel et! Doloribus..</p>
-                </div>
-            </div>
         </div>
     )
 }

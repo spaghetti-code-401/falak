@@ -5,12 +5,25 @@ import ChatTop from './ChatTop'
 import './messages.scss'
 
 export default function Messages() {
-    const {glass} = useTheme()
-    
+    const { glass } = useTheme()
+
+
     return (
         <div className={`messagesContainer ${glass}`}>
-            <ChatTop/>
-            <ChatForm/>
+            <div className='chatTop'>
+                <div className='message'>
+                    <div className='messageLeft'>
+                        <img src="/images/test.jpg" alt="" />
+                    </div>
+                    <div className='messageRight'>
+                        <p className={`messageContent ${lightText} ${glass2}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit doloribus dolores, vero deleniti quod vel et! Doloribus..</p>
+                    </div>
+                </div>
+            </div>
+            <form className='chatForm'>
+                <input placeholder='Write Something' type="text" className={`chatInput ${lightText} ${glass2}`}/>
+                <button  className={`chatButton ${lightText} ${glass2}`}>Send</button>
+            </form>
         </div>
     )
 }
