@@ -149,3 +149,9 @@ body {
   .dimmed {
     color: #505050 !important;
   }
+
+// style for a --> react-router-dom (Link)
+a {
+  text-decoration: none;
+  color: lightgray;
+}

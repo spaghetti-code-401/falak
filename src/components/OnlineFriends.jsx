@@ -10,11 +10,11 @@ export default function OnlineFriends({user}) {
       <div className="onlineFriend" >
         <img
           className="onlineFriendPic"
-          src={user.profilePicture ? PF+user.profilePicture : PF+'person/noAvatar.png'}
+          src={user?.profilePicture ? PF+user.profilePicture : PF+'person/noAvatar.png'}
           alt=""
         />
         <div className="greenDot"></div>
-        <p className={`onlineFriendUsername ${lightText}`}>{user.username}</p>
+        <p className={`onlineFriendUsername ${lightText}`}>{user?.username}</p>
       </div>
   );
 }

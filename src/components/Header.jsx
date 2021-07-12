@@ -6,10 +6,11 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { SearchOutlined } from '@material-ui/icons';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
-import usePF from '../hooks/usePF'
+import usePF from '../hooks/usePF';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const {
     glass,
     setGlass,
@@ -20,7 +21,7 @@ export const Header = () => {
     background,
     setBackground
   } = useTheme();
-  const PF = usePF()
+  const PF = usePF();
 
   const handleSetTheme = () => {
     glass === 'glass' ? setGlass('glassLight') : setGlass('glass');
@@ -32,20 +33,42 @@ export const Header = () => {
   };
   return (
     <header className={`header ${glass}`}>
-      <div className={`headerLogo ${lightText}`}>social</div>
+      <Link to="/">
+        <div className={`headerLogo ${lightText}`}>falak</div>
+      </Link>
       <div className={`headerSearch ${glass2}`}>
-        <SearchOutlined className={lightText ? `headerSearchIcon ${lightText} dimmed` : 'headerSearchIcon'} />
-        <input type="text" placeholder="search" className={`headerSearchInput ${lightText}`} />
+        <SearchOutlined
+          className={
+            lightText
+              ? `headerSearchIcon ${lightText} dimmed`
+              : 'headerSearchIcon'
+          }
+        />
+        <input
+          type="text"
+          placeholder="search"
+          className={`headerSearchInput ${lightText}`}
+        />
       </div>
       <div className="headerRight">
-        <HomeIcon className={`homeIcon ${lightText}`}/>
-        <TextsmsIcon className={`messageIcon ${lightText}`} />
+        <Link to="/">
+          <HomeIcon className={`homeIcon ${lightText}`} />
+        </Link>
+        <Link to="/chat">
+          <TextsmsIcon className={`messageIcon ${lightText}`} />
+        </Link>
         <p className={`logout ${lightText}`}>Logout</p>
         <p className={`setTheme ${lightText}`} onClick={handleSetTheme}>
           setTheme
         </p>
         {/* <AccountCircleIcon className="avatarIcon" /> */}
-        <img src={PF+user.profilePicture} alt="" className="headerUserImage" />
+        <Link to={`/profile/${user.username}`}>
+          <img
+            src={PF + user.profilePicture}
+            alt=""
+            className="headerUserImage"
+          />
+        </Link>
         {/* <div className="headerDropdown glass2">
           <p className="dropdownProfile">Profile</p>
           <p className="dropdownLogout">Logout</p>
