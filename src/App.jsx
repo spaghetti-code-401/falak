@@ -17,7 +17,9 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Background from './components/Background';
 import { useTheme } from './context/ThemeContext';
+import Chat from './pages/Chat';
 import { useAuth } from './context/AuthContext';
+
 function App() {
   const { background } = useTheme();
   const {user} = useAuth()
@@ -38,6 +40,9 @@ function App() {
           </Route>
           <Route exact path="/profile/:username">
             <Profile />
+          </Route>
+          <Route exact path="/chat">
+            <Chat />
           </Route>
         </Switch>
       </Router>

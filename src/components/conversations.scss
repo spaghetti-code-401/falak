@@ -1,0 +1,31 @@
+.conversations {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-bottom: 20px;
+  
+    .conversationsHeader {
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 0;
+    }
+  }
+  
+  .conversation {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    
+    .conversationPic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .conversationUsername {
+      margin-left: 10px;
+      font-weight: 500;
+      font-size: 16px;
+    }
+  }
+  

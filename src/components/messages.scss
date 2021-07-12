@@ -1,0 +1,9 @@
+.messagesContainer{
+    flex: 6;
+    padding: 30px;
+    border-radius: 20px;
+    max-height: calc(100vh - 100px);
+    height: calc(100vh - 120px);
+
+    color: lightgrey;
+}
