@@ -1,32 +1,91 @@
+
 .share {
-  text-align: center;
-  // height: 100px;
-  .plusPostIcon {
-    font-size: 70px;
-    color: rgb(77, 156, 119);
-  }
 
   .shareWrapper {
-    background: #35d8a298;
-    height: 85px;
-    width: 100%;
-    margin: auto;
-    padding: 18px 20px;
+    min-height: 135px;
+    padding: 20px;
     border-radius: 10px;
-    display: flex;
-    .avatarIconShare {
-      font-size: 50px;
-      color: rgb(64, 70, 69);
+
+    .shareHeader {
+      display: flex;
+
+      .shareTextField {
+        padding: 5px;
+        margin-left: 8px;
+        height: 50px;
+        width: 100%;
+        color: wheat;
+        resize: none;
+        box-shadow: none;
+        &::placeholder {
+          color: gray;
+        }
+  
+      }
+      
+      .shareTextField:focus {
+        outline: none;
+        height: 100px;
+
+
+
+      }
+
+      .shareImg {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        cursor: pointer;
+        margin-right: 20px;
+      }
+      .shareInput {
+        background: none;
+        border: none;
+        width: 100%;
+        color: lightgray;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: rgb(167, 167, 167);
+        }
+      }
     }
 
-    .postTextArea {
-      width: 400px;
-      height: 80px;
+    .shareBottom {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      .shareImageIcon {
+        color: lightgray;
+        cursor: pointer;
+      }
+
+      .shareImageLabel {
+        margin-left: 53px;
+        color: lightgray;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .shareImageIcon {
+          margin-right: 10px;
+        }
+      }
+
+      .btnPost {
+        color: white;
+      }
     }
+
   }
 }
 
-.shareInput {
-  width: 300px;
-  height: 150px;
+input[type="file"] {
+  display: none;
 }
