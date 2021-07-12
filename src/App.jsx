@@ -1,4 +1,10 @@
 import './app.scss';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
 
 import Header from './components/Header';
 import Home from './pages/Home';
@@ -11,16 +17,30 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Background from './components/Background';
 import { useTheme } from './context/ThemeContext';
+import { useAuth } from './context/AuthContext';
 function App() {
-  const {background} = useTheme()
+  const { background } = useTheme();
+  const {user} = useAuth()
   return (
     <>
       <div className={background}></div>
       <Background />
-      {/* <Home /> */}
-      {/* <SignIn/> */}
-      <SignUp/>
-      {/* <Profile /> */}
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            {user ? <Home /> : <Redirect to="/signin" />}
+          </Route>
+          <Route exact path="/signin">
+            {user ? <Redirect to="/" /> : <SignIn />}
+          </Route>
+          <Route exact path='/signup'>
+            <SignUp />
+          </Route>
+          <Route exact path="/profile/:username">
+            <Profile />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 }
