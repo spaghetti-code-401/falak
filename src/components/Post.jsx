@@ -9,6 +9,7 @@ import usePF from '../hooks/usePF';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { format } from 'timeago.js';
+import useAPI from '../hooks/useAPI';
 
 const Post = ({ post }) => {
   const { glass2, lightText } = useTheme();
@@ -17,13 +18,13 @@ const Post = ({ post }) => {
   const [user, setUser] = useState({});
   const { user: currentUser } = useAuth();
   const PF = usePF();
+  const API = useAPI();
 
   async function likeHandler() {
     try {
-      await axios.put(
-        `https://api-social-mern.herokuapp.com/api/posts/${post._id}/like`,
-        { userId: currentUser._id }
-      );
+      await axios.put(`${API}posts/${post._id}/like`, {
+        userId: currentUser._id
+      });
     } catch (err) {
       console.log(err);
     }
@@ -37,14 +38,12 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(
-        `https://api-social-mern.herokuapp.com/api/users?userId=${post.userId}`
-      );
+      const res = await axios.get(`${API}users?userId=${post.userId}`);
       // console.log(res.data);
       setUser(res.data);
     };
     fetchUser();
-  }, [post.userId]);
+  }, [API, post.userId]);
 
   return (
     <section className={`postSection ${glass2}`}>
@@ -65,20 +64,25 @@ const Post = ({ post }) => {
         <div className="postHeader">
           {/* <AccountCircleIcon className="avatarIconPost" /> */}
           <div className="postHeaderInfo">
-            <p className={`postHeaderUsername ${lightText}`}>
-              {user.username}
+            <Link to={`/profile/${user.username}`}>
+              <p className={`postHeaderUsername ${lightText}`}>
+                {user.username}
+              </p>
+            </Link>
+            <p className={`postHeaderDate ${lightText}`}>
+              {format(post.createdAt)}
             </p>
-            <p className={`postHeaderDate ${lightText}`}>{format(post.createdAt)}</p>
           </div>
         </div>
         <div className="postMain">
-          <p className={lightText}>
-            {post?.desc}
-          </p>
+          <p className={lightText}>{post?.desc}</p>
           {post?.img && <img className={glass2} src={PF + post?.img} alt="" />}
         </div>
         <div className="postFooter">
-          <ThumbUpAltIcon className={`postFooterIcon ${lightText}`} onClick={likeHandler} />
+          <ThumbUpAltIcon
+            className={`postFooterIcon ${lightText}`}
+            onClick={likeHandler}
+          />
           <p className={lightText}>{like}</p>
           {/* <CommentIcon className={`postFooterIcon ${lightText}`} />
           <p className={lightText}>0 comment</p> */}

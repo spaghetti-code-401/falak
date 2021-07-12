@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { Add, Remove } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
+import useAPI from '../hooks/useAPI';
 
 export default function SideBar({ user }) {
   const { glass, glass2, lightText } = useTheme();
@@ -14,6 +15,7 @@ export default function SideBar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useAuth();
   const [followed, setFollowed] = useState(false);
+  const API = useAPI()
 
   useEffect(() => {
     setFollowed(currentUser.following.includes(user?._id));
@@ -23,17 +25,11 @@ export default function SideBar({ user }) {
     const getFriends = async () => {
       try {
         const friendList = await axios.get(
-          `https://api-social-mern.herokuapp.com/api/users/friends/${
+          `${API}users/friends/${
             user ? user?._id : currentUser._id
           }`
         );
-        setFriends([
-          ...friendList.data,
-          ...friendList.data,
-          ...friendList.data,
-          ...friendList.data,
-          ...friendList.data
-        ]);
+        setFriends(friendList.data);
       } catch (err) {
         console.log(err);
       }
@@ -45,13 +41,13 @@ export default function SideBar({ user }) {
     try {
       if (followed) {
         await axios.put(
-          `https://api-social-mern.herokuapp.com/api/users/${user._id}/unfollow`,
+          `${API}users/${user._id}/unfollow`,
           { userId: currentUser._id }
         );
         dispatch({ type: 'UNFOLLOW', payload: user._id });
       } else {
         await axios.put(
-          `https://api-social-mern.herokuapp.com/api/users/${user._id}/follow`,
+          `${API}users/${user._id}/follow`,
           { userId: currentUser._id }
         );
         dispatch({ type: 'FOLLOW', payload: user._id });

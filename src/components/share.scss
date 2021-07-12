@@ -55,6 +55,24 @@
       }
     }
 
+    .shareFileContainer {
+      position: relative;
+      margin-top: 15px;
+      
+      .shareFile {
+        width: 100%;
+        max-height: 350px;
+        object-fit: contain;
+      }
+
+      .shareCancelFile {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        color: rgba($color: lightgray, $alpha: 0.7);
+      }
+    }
+
     .shareBottom {
       margin-top: 10px;
       display: flex;

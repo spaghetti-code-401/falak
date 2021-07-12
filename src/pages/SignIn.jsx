@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import { LoginStart, LoginSuccess, LoginFailure } from '../context/AuthActions';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import useAPI from '../hooks/useAPI';
 
 export default function SignIn() {
   const email = useRef();
   const password = useRef();
+  const API = useAPI()
 
   const { user, isFetching, error, dispatch } = useAuth();
 
@@ -19,7 +21,7 @@ export default function SignIn() {
 
       try {
         const res = await axios.post(
-          `https://api-social-mern.herokuapp.com/api/auth/login`,
+          `${API}auth/login`,
           userCredentials
         );
         dispatch(LoginSuccess(res.data));

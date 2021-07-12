@@ -3,6 +3,7 @@ import './signin_signup.scss';
 import { Button, TextField } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import useAPI from '../hooks/useAPI';
 
 export default function SignUp() {
   const username = useRef();
@@ -10,6 +11,7 @@ export default function SignUp() {
   const password = useRef();
   const passwordAgain = useRef();
   const history = useHistory();
+  const API = useAPI()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ export default function SignUp() {
       };
       try {
         await axios.post(
-          'https://api-social-mern.herokuapp.com/api/auth/register',
+          `${API}auth/register`,
           user
         );
         // on successful sign up, redirect to sign in

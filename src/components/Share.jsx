@@ -10,6 +10,7 @@ import usePF from '../hooks/usePF';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import { Cancel } from '@material-ui/icons';
+import useAPI from '../hooks/useAPI';
 
 const Share = (props) => {
   const { user } = useAuth();
@@ -17,6 +18,7 @@ const Share = (props) => {
   const PF = usePF();
   const postDesc = useRef();
   const [file, setFile] = useState(null);
+  const API = useAPI()
 
   console.log(file);
 
@@ -39,7 +41,7 @@ const Share = (props) => {
 
     try {
       await axios.post(
-        'https://api-social-mern.herokuapp.com/api/posts',
+        `${API}posts`,
         newPost
       );
       // instead of reloading window, update post state
@@ -79,8 +81,15 @@ const Share = (props) => {
 
         {file && (
           <div className="shareFileContainer">
-            <img src={URL.createObjectURL(file)} alt="" className="shareFile" />
-            <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+            <img
+              src={URL.createObjectURL(file)}
+              alt=""
+              className={`shareFile ${glass2}`}
+            />
+            <Cancel
+              className={`shareCancelFile ${lightText}`}
+              onClick={() => setFile(null)}
+            />
           </div>
         )}
 

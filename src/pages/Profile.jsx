@@ -12,11 +12,13 @@ import { useParams } from 'react-router';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useTheme } from '../context/ThemeContext';
+import useAPI from '../hooks/useAPI';
 
 const Profile = (props) => {
   const PF = usePF();
   const [user, setUser] = useState();
-  const {glass, glass2, lightText} = useTheme()
+  const { glass, glass2, lightText } = useTheme();
+  const API = useAPI()
 
   // take username from params (we defined it as /:username)
   const { username } = useParams();
@@ -24,12 +26,12 @@ const Profile = (props) => {
   useEffect(() => {
     const fetchUser = async () => {
       const res = await axios.get(
-        `https://api-social-mern.herokuapp.com/api/users?username=${username}`
+        `${API}users?username=${username}`
       );
       setUser(res.data);
     };
     fetchUser();
-  }, [username]);
+  }, [API, username]);
   return (
     <>
       <Header />
@@ -40,23 +42,38 @@ const Profile = (props) => {
             <div className="coverAndProfileImgs">
               <img
                 className="coverImage"
-                src="https://tipsmake.com/data1/thumbs/how-to-extract-img-files-in-windows-10-thumb-bzxI4IDgg.jpg"
+                src={
+                  user?.coverPicture
+                    ? PF + user.coverPicture
+                    : PF + 'post/2.jpg'
+                }
                 alt=""
               />
               <img
                 className="profileImage"
-                src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+                src={
+                  user?.profilePicture
+                    ? PF + user.profilePicture
+                    : PF + 'person/noAvatar.png'
+                }
                 alt=""
               />
             </div>
             <div className="profileNameAndBio">
-              <p className={`profileUserName ${lightText}`}>qais </p>
-              <p className={`profileUserBio ${lightText}`}>Developer saffaaaaaa7</p>
+              <p className={`profileUserName ${lightText}`}>{user?.username}</p>
+              <p className={`profileUserBio ${lightText}`}>{user?.bio}</p>
             </div>
             <div className={`profileUserInfo ${glass2}`}>
-              <p className={`${lightText}`}>City: Norway</p>
-              <p className={`${lightText}`}>From: Philadelphia</p>
-              <p className={`${lightText}`}>Relationship: -</p>
+              <p className={`${lightText}`}>City: {user?.city}</p>
+              <p className={`${lightText}`}>From: {user?.from}</p>
+              <p className={`${lightText}`}>
+                Relationship:{' '}
+                {user?.relationship === 1
+                  ? 'Single'
+                  : user?.relationship === 2
+                  ? 'Married'
+                  : 'Complicated'}
+              </p>
             </div>
           </section>
           <hr className="profileHr" />
@@ -67,37 +84,5 @@ const Profile = (props) => {
     </>
   );
 };
-
-//   return (
-//     <>
-//       <section className="profile">
-//         <div className="coverAndProfile">
-//           <img
-//             className="coverImage"
-//             src="https://tipsmake.com/data1/thumbs/how-to-extract-img-files-in-windows-10-thumb-bzxI4IDgg.jpg"
-//             alt=""
-//           />
-//           <img
-//             className="profileImage"
-//             src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-//             alt=""
-//           />
-//           {/* <AccountCircleIcon className="profileImage"/> */}
-//         </div>
-//         <div className="profileName">
-//           <p className="name">qais </p>
-//           <p className="nickName">qais waleed ata</p>
-//         </div>
-//         <div className="profileDescription">
-//           <p>city : Norway </p>
-//           <p>relationships : lllll </p>
-//           <p>more .... </p>
-//         </div>
-//         <Share className="profileShare" />
-//       </section>
-//       <SideBar user={user} />
-//     </>
-//   );
-// };
 
 export default Profile;

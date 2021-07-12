@@ -1,5 +1,5 @@
 const usePF = () => {
-  const PF = 'https://api-social-mern.herokuapp.com/images/'
+  const PF = 'https://falak-api.herokuapp.com/images/'
   return PF;
 }
 

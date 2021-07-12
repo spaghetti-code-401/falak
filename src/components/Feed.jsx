@@ -5,22 +5,23 @@ import './feed.scss';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import useAPI from '../hooks/useAPI'
 
 export default function Feed({ username, profile }) {
   const { glass } = useTheme();
   const { user } = useAuth();
   const [posts, setPosts] = useState();
+  const API = useAPI()
 
   useEffect(() => {
     const fetchPosts = async () => {
       const res = username
         ? await axios.get(
-            `https://api-social-mern.herokuapp.com/api/posts/profile/${username}`
+            `${API}posts/profile/${username}`
           )
         : await axios.get(
-            `https://api-social-mern.herokuapp.com/api/posts/timeline/${user._id}`
+            `${API}posts/timeline/${user._id}`
           );
-      console.log(res.data);
       setPosts(
         res.data.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
@@ -28,7 +29,7 @@ export default function Feed({ username, profile }) {
       );
     };
     fetchPosts();
-  }, [username, user._id]);
+  }, [username, user._id, API]);
   return (
     // profileFeed class to fix a scrolling issue
     <div className={profile ? 'feed profileFeed' : `feed ${glass}`}>
