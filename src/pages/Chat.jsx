@@ -35,9 +35,11 @@ export default function Chat() {
   const [chattingFriend, setChattingFriend] = useState(null);
   const socket = useRef();
   const [showEditor, setShowEditor] = useState(false);
+  const [userCode, setUserCode] = useState('');
 
   useEffect(() => {
     socket.current = io('https://falak-socket.herokuapp.com/');
+    // socket.current = io('http://localhost:8900/');
     socket.current.on('getMessage', (data) => {
       // console.log('getMessage');
       setArrivalMessage({
@@ -46,6 +48,9 @@ export default function Chat() {
         createdAt: Date.now()
       });
     });
+    socket.current.on('getCode', data => {
+      (data.senderId !== user._id) && setUserCode(data.text)
+    })
     // console.log('IN CHAT COMPONENT');
   }, []);
 
@@ -65,6 +70,7 @@ export default function Chat() {
     });
   }, [socket, user._id, user.following]);
 
+  // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -177,8 +183,13 @@ export default function Chat() {
   }
 
   function CodeEditor() {
-    const [userCode, setUserCode] = useState('');
+    
     const [renderConsole, setRenderConsole] = useState(false);
+    const [cursor, setCursor] = useState(1);
+
+    function onCursorChange(newValue) {
+      console.log(newValue)
+    }
 
     function editorCodeOnChange(newValue) {
       setUserCode(newValue);
@@ -194,7 +205,19 @@ export default function Chat() {
       setTimeout(() => {
         setRenderConsole(true);
       }, 25);
-    }    
+    }
+    
+    useEffect(() => {
+      try {
+        socket.current.emit('sendCode', {
+          senderId: user._id,
+          receiverId: chattingFriend._id,
+          text: userCode
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    }, [userCode])
 
     return (
       <div className={`aceEditorContainer ${glass}`}>
@@ -207,15 +230,18 @@ export default function Chat() {
           className={`${glass2}`}
           mode="javascript"
           theme="dracula"
+          value={userCode}
+          focus={true}
           onChange={editorCodeOnChange}
+          // onCursorChange={onCursorChange}
           name="aceEditor"
           height="70%"
           width="100%"
           fontSize="16px"
           wrapEnabled={true}
-          enableBasicAutocompletion={true}
-          enableLiveAutocompletion={true}
-          enableSnippets={true}
+          // enableBasicAutocompletion={true}
+          // enableLiveAutocompletion={true}
+          // enableSnippets={true}
           // showGutter={false}
           // editorProps={{ $blockScrolling: true }}
           style={{ borderRadius: '10px' }}
