@@ -44,10 +44,9 @@ export default function SignUp() {
     <div className="signIn">
       <div className="signInWrapper glass">
         <div className="signInLeft">
-          <h1>Lorem ipsum</h1>
+          <h1>falak</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-            nostrum facere quasi ipsum culpa quae pariatur quia recusandae omnis
+            Are you ready for who knows what?
           </p>
         </div>
         <div className="signInRight glass2">
@@ -86,8 +85,8 @@ export default function SignUp() {
               Sign Up
             </button>
           </form>
-          <p>Already have an account?</p>
-          <Link to="/signin">
+          <p className="loginOr">Already have an account?</p>
+          <Link to="/signin" className="loginButtonWrapper">
             <button className="newAccountButton glass2">log In</button>
           </Link>
         </div>

@@ -1,9 +1,18 @@
+.onlineFriendsContainer {
+  padding: 20px;
 
+  .onlineFriendsHeader {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+}
 .onlineFriend {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  
+  margin-top: 20px;
+  cursor: pointer;
+
   .onlineFriendPic {
     width: 32px;
     height: 32px;
@@ -11,11 +20,11 @@
     object-fit: cover;
   }
   .onlineFriendUsername {
-    margin-left: 10px;
+    margin-left: 5px;
     font-weight: 500;
     font-size: 16px;
   }
-  
+
   .greenDot {
     height: 10px;
     width: 10px;

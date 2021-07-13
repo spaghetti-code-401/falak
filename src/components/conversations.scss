@@ -1,12 +1,12 @@
-.conversations {
+.conversationsContainer {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
   
     .conversationsHeader {
       font-weight: 600;
-      font-size: 20px;
+      font-size: 18px;
       margin-bottom: 0;
     }
   }
@@ -15,15 +15,16 @@
     display: flex;
     align-items: center;
     margin-top: 20px;
+    cursor: pointer;
     
     .conversationPic {
       width: 32px;
       height: 32px;
       border-radius: 50%;
       object-fit: cover;
+      margin-right: 15px;
     }
     .conversationUsername {
-      margin-left: 10px;
       font-weight: 500;
       font-size: 16px;
     }

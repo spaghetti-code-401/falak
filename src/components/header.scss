@@ -1,5 +1,6 @@
 .header {
   height: 70px;
+  min-width: 900px;
   width: 60vw;
   margin: auto;
   border-bottom-left-radius: 20px;
@@ -68,11 +69,13 @@
       color: lightgray;
       // flex: 1;
       cursor: pointer;
+      transform: translateY(3px);
     }
-
+    
     .messageIcon {
       font-size: 22px;
       color: lightgray;
+      transform: translateY(4px);
       // flex: 1;
       cursor: pointer;
     }
