@@ -1,9 +1,9 @@
 # Falak 
-is a social media appllication with a lovely style
+is a social media platform for develops with a lovely style
 
 ## Group Members 
-+ Ali Sirtawi
-+ Ahmed Aboya7ya 
++ Ali Sartawi
++ Ahmed Abuyahya 
 + Qais Ata 
 
 ## UML diagram
@@ -81,12 +81,10 @@ route | page
  `` /chat `` | chat page 
 
 # Technologies 
-![](./public/images/tools.png)
+![](./public/images/tools02.gif)
 
 ## Other Tec and Tools :
 + axios
-+ react ace editor 
-+ three
 + material-ui
 + timeago.js
 
