@@ -69,20 +69,22 @@
       color: lightgray;
       // flex: 1;
       cursor: pointer;
-      transform: translateY(3px);
+      transform: translateY(10px);
     }
     
     .messageIcon {
       font-size: 22px;
       color: lightgray;
-      transform: translateY(4px);
+      transform: translateY(12px);
       // flex: 1;
       cursor: pointer;
     }
+    .themeSwitch{
+      transform: translateY(16px);
+    }
 
     .logout {
-      // flex: 2;
-      // text-align: center;
+      transform: translateY(11px);
       cursor: pointer;
     }
 
@@ -125,6 +127,18 @@
     color: gray;
   }
   
+}
+.headerIconContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  transform: translateY(-7px);
+
+  p{
+    font-size: small;
+  }
 }
 
 

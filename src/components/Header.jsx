@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './header.scss';
 import HomeIcon from '@material-ui/icons/Home';
 import TextsmsIcon from '@material-ui/icons/Textsms';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { SearchOutlined } from '@material-ui/icons';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import usePF from '../hooks/usePF';
 import { Link } from 'react-router-dom';
+import DarkModeToggle from "react-dark-mode-toggle";
+import { useEffect } from 'react';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export const Header = () => {
+  const [isDarkMode, setIsDarkMode] = useState(() => true);
+  const [onLoad, setOnLoad] = useState(true);
+
   const { user } = useAuth();
   const {
     glass,
@@ -28,15 +33,28 @@ export const Header = () => {
 
     window.location.reload();
   };
+  useEffect(() => {
+    if (!onLoad) {
+      glass === 'glass' ? setGlass('glassLight') : setGlass('glass');
+      glass2 === 'glass2' ? setGlass2('glassLight2') : setGlass2('glass2');
+      lightText === '' ? setLightText('lightText') : setLightText('');
+      background === 'background'
+        ? setBackground('backgroundLight')
+        : setBackground('background');
 
-  const handleSetTheme = () => {
-    glass === 'glass' ? setGlass('glassLight') : setGlass('glass');
-    glass2 === 'glass2' ? setGlass2('glassLight2') : setGlass2('glass2');
-    lightText === '' ? setLightText('lightText') : setLightText('');
-    background === 'background'
-      ? setBackground('backgroundLight')
-      : setBackground('background');
-  };
+    }
+    setOnLoad(false)
+  }, [isDarkMode])
+
+  // const handleSetTheme = () => {
+  //   glass === 'glass' ? setGlass('glassLight') : setGlass('glass');
+  //   glass2 === 'glass2' ? setGlass2('glassLight2') : setGlass2('glass2');
+  //   lightText === '' ? setLightText('lightText') : setLightText('');
+  //   background === 'background'
+  //     ? setBackground('backgroundLight')
+  //     : setBackground('background');
+
+  // };
   return (
     <header className={`header ${glass}`}>
       <Link to="/">
@@ -58,18 +76,31 @@ export const Header = () => {
       </div>
       <div className="headerRight">
         <Link to="/">
-          <HomeIcon className={`homeIcon ${lightText}`} />
+          <div className="headerIconContainer">
+            <HomeIcon className={`homeIcon ${lightText}`} />
+            <p className={lightText}>Home</p>
+          </div>
         </Link>
-        <Link to="/chat">
-          <TextsmsIcon className={`messageIcon ${lightText}`} />
-        </Link>
-        <p onClick={handleLogout} className={`logout ${lightText}`}>
-          Logout
-        </p>
-        <p className={`setTheme ${lightText}`} onClick={handleSetTheme}>
-          setTheme
-        </p>
-        {/* <AccountCircleIcon className="avatarIcon" /> */}
+        <div className="headerIconContainer">
+          <Link to="/chat">
+            <TextsmsIcon className={`messageIcon ${lightText}`} />
+          </Link>
+          <p className={lightText}>Chat</p>
+        </div>
+        <div className="headerIconContainer">
+          <ExitToAppIcon onClick={handleLogout} className={`logout ${lightText}`} />
+          <p className={lightText}>Logout</p>
+        </div>
+        <div className="headerIconContainer">
+          <DarkModeToggle className='themeSwitch'
+            onChange={setIsDarkMode}
+            checked={isDarkMode}
+            size={40}
+            speed={1}
+          />
+          <p className={lightText}>Theme</p>
+        </div>
+
         <Link to={`/profile/${user.username}`}>
           <img
             src={
@@ -81,6 +112,7 @@ export const Header = () => {
             className="headerUserImage"
           />
         </Link>
+
         {/* <div className="headerDropdown glass2">
           <p className="dropdownProfile">Profile</p>
           <p className="dropdownLogout">Logout</p>
