@@ -7,7 +7,7 @@ is a social media appllication with a lovely style
 + Qais Ata 
 
 ## UML diagram
-
+![](./public/images/uml.png)
 
 ## DB Schemas 
 1. Conversation 
@@ -75,6 +75,13 @@ route | page
 
 # Technologies 
 ![](./public/images/tools.png)
+
+## Other Tec and Tools :
++ axios
++ react ace editor 
++ three
++ material-ui
++ timeago.js
 
 ## Deploy Link 
 https://falak-social.netlify.app/
