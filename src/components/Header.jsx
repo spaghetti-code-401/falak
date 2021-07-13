@@ -23,6 +23,12 @@ export const Header = () => {
   } = useTheme();
   const PF = usePF();
 
+  const handleLogout = () => {
+    localStorage.setItem('socialUser', null)
+
+    window.location.reload()
+  }
+
   const handleSetTheme = () => {
     glass === 'glass' ? setGlass('glassLight') : setGlass('glass');
     glass2 === 'glass2' ? setGlass2('glassLight2') : setGlass2('glass2');
@@ -57,7 +63,7 @@ export const Header = () => {
         <Link to="/chat">
           <TextsmsIcon className={`messageIcon ${lightText}`} />
         </Link>
-        <p className={`logout ${lightText}`}>Logout</p>
+        <p onClick={handleLogout} className={`logout ${lightText}`}>Logout</p>
         <p className={`setTheme ${lightText}`} onClick={handleSetTheme}>
           setTheme
         </p>
