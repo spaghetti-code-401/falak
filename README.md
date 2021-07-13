@@ -1,5 +1,5 @@
 # Falak 
-is a social media appllication with a lovely style 
+is a social media appllication with a lovely style
 
 ## Group Members 
 + Ali Sirtawi
@@ -11,12 +11,19 @@ is a social media appllication with a lovely style
 
 ## DB Schemas 
 1. Conversation 
+
 ![](./public/images/schema/conversation.png)
+
 2. Message 
+
 ![](./public/images/schema/message.png)
+
 3. Post 
+
 ![](./public/images/schema/post.png)
+
 4. User 
+
 ![](./public/images/schema/user.png)
 
 ## Features & Routes
