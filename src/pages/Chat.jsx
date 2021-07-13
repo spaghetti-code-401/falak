@@ -192,6 +192,20 @@ export default function Chat() {
       // console.log(userCode)
     }
 
+    function editorCodeOnInput(e) {
+      // setUserCode(newValue);
+      console.log('input')
+      try {
+        socket.current.emit('sendCode', {
+          senderId: user._id,
+          receiverId: chattingFriend._id,
+          text: userCode
+        })
+      } catch (e) {
+        console.log('SOCKET::::::::::', e)
+      }
+    }
+
     function handleResetCode() {
       setRenderConsole(false);
     }
@@ -203,17 +217,17 @@ export default function Chat() {
       }, 10);
     }
     
-    useEffect(() => {
-      try {
-        socket.current.emit('sendCode', {
-          senderId: user._id,
-          receiverId: chattingFriend._id,
-          text: userCode
-        })
-      } catch (e) {
-        console.log(e)
-      }
-    }, [userCode])
+    // useEffect(() => {
+    //   try {
+    //     socket.current.emit('sendCode', {
+    //       senderId: user._id,
+    //       receiverId: chattingFriend._id,
+    //       text: userCode
+    //     })
+    //   } catch (e) {
+    //     console.log(e)
+    //   }
+    // }, [userCode])
 
     return (
       <div className={`aceEditorContainer ${glass}`}>
@@ -229,6 +243,7 @@ export default function Chat() {
           value={userCode}
           focus={true}
           onChange={editorCodeOnChange}
+          onInput={editorCodeOnInput}
           // onCursorChange={onCursorChange}
           name="aceEditor"
           height="70%"

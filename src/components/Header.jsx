@@ -96,7 +96,7 @@ export const Header = () => {
             onChange={setIsDarkMode}
             checked={isDarkMode}
             size={40}
-            speed={1}
+            speed={15}
           />
           <p className={lightText}>Theme</p>
         </div>
