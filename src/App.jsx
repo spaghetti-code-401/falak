@@ -45,7 +45,9 @@ function App() {
           <Route exact path="/chat">
             {user ? <Chat /> : <Redirect to="/signin" />}
           </Route>
-          <Route path="/*">
+
+          {/* works with or without exact */}
+          <Route exact path="/*">
             <NotFound />
           </Route>
         </Switch>

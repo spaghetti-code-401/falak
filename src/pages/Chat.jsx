@@ -31,7 +31,7 @@ export default function Chat() {
   const { user } = useAuth();
   const [chattingFriend, setChattingFriend] = useState(null);
   const socket = useRef();
-  const [showEditor, setShowEditor] = useState(true);
+  const [showEditor, setShowEditor] = useState(false);
 
   useEffect(() => {
     socket.current = io('https://falak-socket.herokuapp.com/');
@@ -143,6 +143,9 @@ export default function Chat() {
   function ChatBox() {
     return (
       <div className={`messagesContainer ${glass}`}>
+        <button onClick={() => setShowEditor(true)} className={`openCodeEditorButton ${lightText} ${glass2}`}>
+          Open code editor
+        </button>
         <div className="chatTop">
           {messages.map((m, i) => (
             <div key={m._id + `${Math.random()}`} ref={scrollRef}>
@@ -171,6 +174,9 @@ export default function Chat() {
   function CodeEditor() {
     return (
       <div className={`aceEditorContainer ${glass}`}>
+        <button onClick={() => setShowEditor(false)} className={`backToChatButton ${lightText} ${glass2}`}>
+          Back to chat
+        </button>
         <AceEditor
           className={`${glass2}`}
           mode="javascript"
@@ -186,7 +192,7 @@ export default function Chat() {
           enableSnippets={true}
           // showGutter={false}
           // editorProps={{ $blockScrolling: true }}
-          style={{ padding: '20px' }}
+          style={{ borderRadius: '10px' }}
         />
         <div className={`console ${glass2}`}>
           <div className="consoleLeft">

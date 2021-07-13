@@ -12,7 +12,19 @@
   max-height: calc(100vh - 100px);
   height: calc(100vh - 100px);
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   color: lightgrey;
+
+  .openCodeEditorButton {
+    width: max-content;
+    color: lightgray;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 0 10px;
+  }
 }
 .message {
   width: 100%;
@@ -25,7 +37,7 @@
   
   .messageTop {
     display: flex;
-    align-items: flex-start;
+    // align-items: flex-start;
     max-width: 60%;
     // border:1px solid black ;
     // height: 100%;
