@@ -1,5 +1,5 @@
 # Falak 
-is a social media appllication with a lovely style 
+is a social media appllication with a lovely style
 
 ## Group Members 
 + Ali Sirtawi
