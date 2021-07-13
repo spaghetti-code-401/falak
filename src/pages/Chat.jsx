@@ -13,6 +13,10 @@ import '../components/chatTop.scss';
 import '../components/message.scss';
 import { io } from 'socket.io-client';
 
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/theme-dracula';
+
 export default function Chat() {
   const { glass2, lightText, glass } = useTheme();
   const API = useAPI();
@@ -27,6 +31,7 @@ export default function Chat() {
   const { user } = useAuth();
   const [chattingFriend, setChattingFriend] = useState(null);
   const socket = useRef();
+  const [showEditor, setShowEditor] = useState(true);
 
   useEffect(() => {
     socket.current = io('https://falak-socket.herokuapp.com/');
@@ -135,43 +140,86 @@ export default function Chat() {
     fetchFriendData();
   }, [API, currentConversation?.members, user._id]);
 
+  function ChatBox() {
+    return (
+      <div className={`messagesContainer ${glass}`}>
+        <div className="chatTop">
+          {messages.map((m, i) => (
+            <div key={m._id + `${Math.random()}`} ref={scrollRef}>
+              <Message
+                message={m}
+                own={m.sender === user._id ? true : false}
+                chattingFriend={chattingFriend}
+                noImg={i && m.sender === messages[i - 1].sender ? 'noImg' : ''}
+              />
+            </div>
+          ))}
+        </div>
+        <form onSubmit={handleSubmit} className="chatForm">
+          <input
+            ref={newMessage}
+            placeholder="Write Something"
+            type="text"
+            className={`chatInput ${lightText} ${glass2}`}
+          />
+          <button className={`chatButton ${lightText} ${glass2}`}>Send</button>
+        </form>
+      </div>
+    );
+  }
+
+  function CodeEditor() {
+    return (
+      <div className={`aceEditorContainer ${glass}`}>
+        <AceEditor
+          className={`${glass2}`}
+          mode="javascript"
+          theme="dracula"
+          // onChange={onChange}
+          name="aceEditor"
+          height="70%"
+          width="100%"
+          fontSize="16px"
+          wrapEnabled={true}
+          enableBasicAutocompletion={true}
+          enableLiveAutocompletion={true}
+          enableSnippets={true}
+          // showGutter={false}
+          // editorProps={{ $blockScrolling: true }}
+          style={{ padding: '20px' }}
+        />
+        <div className={`console ${glass2}`}>
+          <div className="consoleLeft">
+            <button className={`runCodeButton ${lightText} ${glass2}`}>
+              run {'>'}
+            </button>
+          </div>
+          <div className={`consoleRight ${glass2}`}></div>
+        </div>
+      </div>
+    );
+  }
+
+  function NoConversation() {
+    return (
+      <div className={`noConversationContainer messagesContainer ${glass} `}>
+        <p className={`noConversationText ${lightText}`}>
+          Open a conversation 👽
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Header />
       <div className="chatContainer">
-        {currentConversation ? (
-          <div className={`messagesContainer ${glass}`}>
-            <div className="chatTop">
-              {messages.map((m, i) => (
-                <div key={m._id + `${Math.random()}`} ref={scrollRef}>
-                  <Message
-                    message={m}
-                    own={m.sender === user._id ? true : false}
-                    chattingFriend={chattingFriend}
-                    noImg={(i && m.sender === messages[i-1].sender) ? 'noImg' : ''}
-                  />
-                </div>
-              ))}
-            </div>
-            <form onSubmit={handleSubmit} className="chatForm">
-              <input
-                ref={newMessage}
-                placeholder="Write Something"
-                type="text"
-                className={`chatInput ${lightText} ${glass2}`}
-              />
-              <button className={`chatButton ${lightText} ${glass2}`}>
-                Send
-              </button>
-            </form>
-          </div>
+        {currentConversation && !showEditor ? (
+          <ChatBox />
+        ) : currentConversation && showEditor ? (
+          <CodeEditor />
         ) : (
-          <div
-            className={`noConversationContainer messagesContainer ${glass} `}>
-            <p className={`noConversationText ${lightText}`}>
-              Open a conversation 👽
-            </p>
-          </div>
+          <NoConversation />
         )}
         <ChatSideBar
           conversations={conversations}

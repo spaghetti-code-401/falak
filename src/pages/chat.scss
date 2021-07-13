@@ -46,3 +46,49 @@
   padding: 10px;
   border-radius: 20px;
 }
+
+.aceEditorContainer {
+  transition: initial;
+  flex: 6;
+  height: calc(100vh - 100px);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  overflow: hidden;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  * {
+    transition: initial;
+    font-size: initial;
+    font-family: 'Monaco';
+  }
+
+  .ace_gutter {
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(1rem);
+    -moz-backdrop-filter: blur(1rem);
+  }
+
+  .console {
+    width: 100%;
+    height: 30%;
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+
+    .consoleLeft {
+      
+      .runCodeButton {
+        padding: 5px 10px;
+        margin-right: 10px;
+        color: lightgray;
+      }
+    }
+
+    .consoleRight {
+      flex: 1;
+    }
+  }
+}
