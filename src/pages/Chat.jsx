@@ -17,6 +17,9 @@ import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-dracula';
 
+import ConsoleComponent from '../components/Console';
+
+
 export default function Chat() {
   const { glass2, lightText, glass } = useTheme();
   const API = useAPI();
@@ -36,14 +39,14 @@ export default function Chat() {
   useEffect(() => {
     socket.current = io('https://falak-socket.herokuapp.com/');
     socket.current.on('getMessage', (data) => {
-      console.log('getMessage');
+      // console.log('getMessage');
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
         createdAt: Date.now()
       });
     });
-    console.log('IN CHAT COMPONENT');
+    // console.log('IN CHAT COMPONENT');
   }, []);
 
   useEffect(() => {
@@ -55,7 +58,7 @@ export default function Chat() {
   useEffect(() => {
     socket.current?.emit('addUser', user._id);
     socket.current?.on('getUsers', (socketUsers) => {
-      console.log('getUsers');
+      // console.log('getUsers');
       setOnlineUsers(
         user.following.filter((f) => socketUsers.some((u) => u.userId === f))
       );
@@ -143,7 +146,9 @@ export default function Chat() {
   function ChatBox() {
     return (
       <div className={`messagesContainer ${glass}`}>
-        <button onClick={() => setShowEditor(true)} className={`openCodeEditorButton ${lightText} ${glass2}`}>
+        <button
+          onClick={() => setShowEditor(true)}
+          className={`openCodeEditorButton ${lightText} ${glass2}`}>
           Open code editor
         </button>
         <div className="chatTop">
@@ -172,16 +177,37 @@ export default function Chat() {
   }
 
   function CodeEditor() {
+    const [userCode, setUserCode] = useState('');
+    const [renderConsole, setRenderConsole] = useState(false);
+
+    function editorCodeOnChange(newValue) {
+      setUserCode(newValue);
+      // console.log(userCode)
+    }
+
+    function handleResetCode() {
+      setRenderConsole(false);
+    }
+    
+    function handleRunCode() {
+      handleResetCode()
+      setTimeout(() => {
+        setRenderConsole(true);
+      }, 25);
+    }    
+
     return (
       <div className={`aceEditorContainer ${glass}`}>
-        <button onClick={() => setShowEditor(false)} className={`backToChatButton ${lightText} ${glass2}`}>
+        <button
+          onClick={() => setShowEditor(false)}
+          className={`backToChatButton ${lightText} ${glass2}`}>
           Back to chat
         </button>
         <AceEditor
           className={`${glass2}`}
           mode="javascript"
           theme="dracula"
-          // onChange={onChange}
+          onChange={editorCodeOnChange}
           name="aceEditor"
           height="70%"
           width="100%"
@@ -196,11 +222,20 @@ export default function Chat() {
         />
         <div className={`console ${glass2}`}>
           <div className="consoleLeft">
-            <button className={`runCodeButton ${lightText} ${glass2}`}>
+            <button
+              onClick={handleRunCode}
+              className={`runCodeButton ${lightText} ${glass2}`}>
               run {'>'}
             </button>
+            <button
+              onClick={handleResetCode}
+              className={`resetCodeButton ${lightText} ${glass2}`}>
+              reset {'>'}
+            </button>
           </div>
-          <div className={`consoleRight ${glass2}`}></div>
+          <div className={`consoleRight ${glass2}`}>
+            {renderConsole && <ConsoleComponent userCode={userCode} renderConsole={renderConsole}/>}
+          </div>
         </div>
       </div>
     );
@@ -215,6 +250,10 @@ export default function Chat() {
       </div>
     );
   }
+
+  useEffect(() => {
+    setShowEditor(false)
+  }, [currentConversation])
 
   return (
     <div>
