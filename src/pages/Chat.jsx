@@ -186,11 +186,6 @@ export default function Chat() {
   function CodeEditor() {
     
     const [renderConsole, setRenderConsole] = useState(false);
-    const [cursor, setCursor] = useState(1);
-
-    function onCursorChange(newValue) {
-      console.log(newValue)
-    }
 
     function editorCodeOnChange(newValue) {
       setUserCode(newValue);
@@ -205,7 +200,7 @@ export default function Chat() {
       handleResetCode()
       setTimeout(() => {
         setRenderConsole(true);
-      }, 25);
+      }, 10);
     }
     
     useEffect(() => {
