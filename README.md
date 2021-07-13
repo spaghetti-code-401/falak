@@ -11,6 +11,7 @@ is a social media appllication with a lovely style
 
 ## DB Schemas 
 1. Conversation 
+
 ![](./public/images/schema/conversation.png)
 
 2. Message 
@@ -18,9 +19,11 @@ is a social media appllication with a lovely style
 ![](./public/images/schema/message.png)
 
 3. Post 
+
 ![](./public/images/schema/post.png)
 
 4. User 
+
 ![](./public/images/schema/user.png)
 
 ## Features & Routes
