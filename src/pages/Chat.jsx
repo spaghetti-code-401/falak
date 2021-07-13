@@ -19,7 +19,6 @@ import 'ace-builds/src-noconflict/theme-dracula';
 
 import ConsoleComponent from '../components/Console';
 
-
 export default function Chat() {
   const { glass2, lightText, glass } = useTheme();
   const API = useAPI();
@@ -36,6 +35,7 @@ export default function Chat() {
   const socket = useRef();
   const [showEditor, setShowEditor] = useState(false);
   const [userCode, setUserCode] = useState('');
+  const [userCodeIncoming, setUserCodeIncoming] = useState('');
 
   useEffect(() => {
     socket.current = io('https://falak-socket.herokuapp.com/');
@@ -48,9 +48,14 @@ export default function Chat() {
         createdAt: Date.now()
       });
     });
-    socket.current.on('getCode', data => {
-      (data.senderId !== user._id) && setUserCode(data.text)
-    })
+    socket.current.on('getCode', (data) => {
+      // data.senderId !== user._id &&
+      //   setUserCode(data.text) &&
+      //   setUserCodeIncoming(data.text);
+      setUserCode(data.text);
+      setUserCodeIncoming(data.text);
+      console.log('RECEIVED')
+    });
     // console.log('IN CHAT COMPONENT');
   }, []);
 
@@ -168,7 +173,10 @@ export default function Chat() {
               />
             </div>
           ))}
-          <div className="scrollIntoView" ref={scrollRef} style={{all: 'unset'}}></div>
+          <div
+            className="scrollIntoView"
+            ref={scrollRef}
+            style={{ all: 'unset' }}></div>
         </div>
         <form onSubmit={handleSubmit} className="chatForm">
           <input
@@ -184,7 +192,6 @@ export default function Chat() {
   }
 
   function CodeEditor() {
-    
     const [renderConsole, setRenderConsole] = useState(false);
 
     function editorCodeOnChange(newValue) {
@@ -194,29 +201,31 @@ export default function Chat() {
 
     function editorCodeOnInput(e) {
       // setUserCode(newValue);
-      console.log('input')
-      try {
-        socket.current.emit('sendCode', {
-          senderId: user._id,
-          receiverId: chattingFriend._id,
-          text: userCode
-        })
-      } catch (e) {
-        console.log('SOCKET::::::::::', e)
+      if (userCode !== userCodeIncoming) {
+        console.log('input');
+        try {
+          socket.current.emit('sendCode', {
+            senderId: user._id,
+            receiverId: chattingFriend._id,
+            text: userCode
+          });
+        } catch (e) {
+          console.log('SOCKET::::::::::', e);
+        }
       }
     }
 
     function handleResetCode() {
       setRenderConsole(false);
     }
-    
+
     function handleRunCode() {
-      handleResetCode()
+      handleResetCode();
       setTimeout(() => {
         setRenderConsole(true);
       }, 10);
     }
-    
+
     // useEffect(() => {
     //   try {
     //     socket.current.emit('sendCode', {
@@ -271,7 +280,12 @@ export default function Chat() {
             </button>
           </div>
           <div className={`consoleRight ${glass2}`}>
-            {renderConsole && <ConsoleComponent userCode={userCode} renderConsole={renderConsole}/>}
+            {renderConsole && (
+              <ConsoleComponent
+                userCode={userCode}
+                renderConsole={renderConsole}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -289,8 +303,8 @@ export default function Chat() {
   }
 
   useEffect(() => {
-    setShowEditor(false)
-  }, [currentConversation])
+    setShowEditor(false);
+  }, [currentConversation]);
 
   return (
     <div>
