@@ -13,6 +13,13 @@ import '../components/chatTop.scss';
 import '../components/message.scss';
 import { io } from 'socket.io-client';
 
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/theme-dracula';
+
+import ConsoleComponent from '../components/Console';
+
+
 export default function Chat() {
   const { glass2, lightText, glass } = useTheme();
   const API = useAPI();
@@ -27,18 +34,24 @@ export default function Chat() {
   const { user } = useAuth();
   const [chattingFriend, setChattingFriend] = useState(null);
   const socket = useRef();
+  const [showEditor, setShowEditor] = useState(false);
+  const [userCode, setUserCode] = useState('');
 
   useEffect(() => {
     socket.current = io('https://falak-socket.herokuapp.com/');
+    // socket.current = io('http://localhost:8900/');
     socket.current.on('getMessage', (data) => {
-      console.log('getMessage');
+      // console.log('getMessage');
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
         createdAt: Date.now()
       });
     });
-    console.log('IN CHAT COMPONENT');
+    socket.current.on('getCode', data => {
+      (data.senderId !== user._id) && setUserCode(data.text)
+    })
+    // console.log('IN CHAT COMPONENT');
   }, []);
 
   useEffect(() => {
@@ -50,13 +63,14 @@ export default function Chat() {
   useEffect(() => {
     socket.current?.emit('addUser', user._id);
     socket.current?.on('getUsers', (socketUsers) => {
-      console.log('getUsers');
+      // console.log('getUsers');
       setOnlineUsers(
         user.following.filter((f) => socketUsers.some((u) => u.userId === f))
       );
     });
   }, [socket, user._id, user.following]);
 
+  // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -118,7 +132,7 @@ export default function Chat() {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({
-      behavior: 'smooth'
+      // behavior: 'smooth'
     });
   }, [messages]);
 
@@ -135,42 +149,149 @@ export default function Chat() {
     fetchFriendData();
   }, [API, currentConversation?.members, user._id]);
 
+  function ChatBox() {
+    return (
+      <div className={`messagesContainer ${glass}`}>
+        <button
+          onClick={() => setShowEditor(true)}
+          className={`openCodeEditorButton ${lightText} ${glass2}`}>
+          Open code editor
+        </button>
+        <div className="chatTop">
+          {messages.map((m, i) => (
+            <div key={m._id + `${Math.random()}`}>
+              <Message
+                message={m}
+                own={m.sender === user._id ? true : false}
+                chattingFriend={chattingFriend}
+                noImg={i && m.sender === messages[i - 1].sender ? 'noImg' : ''}
+              />
+            </div>
+          ))}
+          <div className="scrollIntoView" ref={scrollRef} style={{all: 'unset'}}></div>
+        </div>
+        <form onSubmit={handleSubmit} className="chatForm">
+          <input
+            ref={newMessage}
+            placeholder="Write Something"
+            type="text"
+            className={`chatInput ${lightText} ${glass2}`}
+          />
+          <button className={`chatButton ${lightText} ${glass2}`}>Send</button>
+        </form>
+      </div>
+    );
+  }
+
+  function CodeEditor() {
+    
+    const [renderConsole, setRenderConsole] = useState(false);
+    const [cursor, setCursor] = useState(1);
+
+    function onCursorChange(newValue) {
+      console.log(newValue)
+    }
+
+    function editorCodeOnChange(newValue) {
+      setUserCode(newValue);
+      // console.log(userCode)
+    }
+
+    function handleResetCode() {
+      setRenderConsole(false);
+    }
+    
+    function handleRunCode() {
+      handleResetCode()
+      setTimeout(() => {
+        setRenderConsole(true);
+      }, 25);
+    }
+    
+    useEffect(() => {
+      try {
+        socket.current.emit('sendCode', {
+          senderId: user._id,
+          receiverId: chattingFriend._id,
+          text: userCode
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    }, [userCode])
+
+    return (
+      <div className={`aceEditorContainer ${glass}`}>
+        <button
+          onClick={() => setShowEditor(false)}
+          className={`backToChatButton ${lightText} ${glass2}`}>
+          Back to chat
+        </button>
+        <AceEditor
+          className={`${glass2}`}
+          mode="javascript"
+          theme="dracula"
+          value={userCode}
+          focus={true}
+          onChange={editorCodeOnChange}
+          // onCursorChange={onCursorChange}
+          name="aceEditor"
+          height="70%"
+          width="100%"
+          fontSize="16px"
+          wrapEnabled={true}
+          // enableBasicAutocompletion={true}
+          // enableLiveAutocompletion={true}
+          // enableSnippets={true}
+          // showGutter={false}
+          // editorProps={{ $blockScrolling: true }}
+          style={{ borderRadius: '10px' }}
+        />
+        <div className={`console ${glass2}`}>
+          <div className="consoleLeft">
+            <button
+              onClick={handleRunCode}
+              className={`runCodeButton ${lightText} ${glass2}`}>
+              run {'>'}
+            </button>
+            <button
+              onClick={handleResetCode}
+              className={`resetCodeButton ${lightText} ${glass2}`}>
+              reset {'>'}
+            </button>
+          </div>
+          <div className={`consoleRight ${glass2}`}>
+            {renderConsole && <ConsoleComponent userCode={userCode} renderConsole={renderConsole}/>}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function NoConversation() {
+    return (
+      <div className={`noConversationContainer messagesContainer ${glass} `}>
+        <p className={`noConversationText ${lightText}`}>
+          Open a conversation 👽
+        </p>
+      </div>
+    );
+  }
+
+  useEffect(() => {
+    setShowEditor(false)
+  }, [currentConversation])
+
   return (
     <div>
       <Header />
       <div className="chatContainer">
-        {currentConversation ? (
-          <div className={`messagesContainer ${glass}`}>
-            <div className="chatTop">
-              {messages.map((m) => (
-                <div key={m._id + `${Math.random()}`} ref={scrollRef}>
-                  <Message
-                    message={m}
-                    own={m.sender === user._id ? true : false}
-                    chattingFriend={chattingFriend}
-                  />
-                </div>
-              ))}
-            </div>
-            <form onSubmit={handleSubmit} className="chatForm">
-              <input
-                ref={newMessage}
-                placeholder="Write Something"
-                type="text"
-                className={`chatInput ${lightText} ${glass2}`}
-              />
-              <button className={`chatButton ${lightText} ${glass2}`}>
-                Send
-              </button>
-            </form>
-          </div>
+        {currentConversation && !showEditor ? (
+          <ChatBox />
+        ) : currentConversation && showEditor ? (
+          <CodeEditor />
         ) : (
-          <div
-            className={`noConversationContainer messagesContainer ${glass} `}>
-            <p className={`noConversationText ${lightText}`}>
-              Open a conversation 👽
-            </p>
-          </div>
+          <NoConversation />
         )}
         <ChatSideBar
           conversations={conversations}

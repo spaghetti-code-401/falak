@@ -12,7 +12,19 @@
   max-height: calc(100vh - 100px);
   height: calc(100vh - 100px);
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   color: lightgrey;
+
+  .openCodeEditorButton {
+    width: max-content;
+    color: lightgray;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 0 10px;
+  }
 }
 .message {
   width: 100%;
@@ -25,7 +37,7 @@
   
   .messageTop {
     display: flex;
-    align-items: flex-start;
+    // align-items: flex-start;
     max-width: 60%;
     // border:1px solid black ;
     // height: 100%;
@@ -37,12 +49,16 @@
       height: 40px;
       border-radius: 50%;
       object-fit: cover;
-      margin-right: 10px;
+      // margin-right: 10px;
     }
+      .noImg {
+        visibility: hidden;
+      }
+
     .messageTextContainer {
       border-radius: 20px;
       padding: 10px 15px 5px 15px;
-      margin-bottom: 20px;
+      margin: 0 10px 20px 10px;
 
       .messageText {
         margin-bottom: 10px;
@@ -61,4 +77,8 @@
 
 .own {
   align-items: flex-end;
+
+  .messageTop {
+    flex-direction: row-reverse;
+  }
 }
