@@ -7,7 +7,7 @@ import usePF from '../hooks/usePF';
 import { format } from 'timeago.js';
 import './message.scss';
 
-export default function Message({ message, own, chattingFriend }) {
+export default function Message({ message, own, chattingFriend, noImg }) {
   const { glass2, lightText } = useTheme();
   const [user, setUser] = useState();
   const PF = usePF();
@@ -34,7 +34,7 @@ export default function Message({ message, own, chattingFriend }) {
         <div className="messageTop">
           {own ? (
             <img
-              className="messageImg"
+              className={`messageImg ${noImg}`}
               src={
                 currentUser?.profilePicture
                   ? PF + currentUser.profilePicture
@@ -44,7 +44,7 @@ export default function Message({ message, own, chattingFriend }) {
             />
           ) : (
             <img
-              className="messageImg"
+              className={`messageImg ${noImg}`}
               src={
                 chattingFriend?.profilePicture
                   ? PF + chattingFriend.profilePicture

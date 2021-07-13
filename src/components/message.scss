@@ -39,6 +39,10 @@
       object-fit: cover;
       // margin-right: 10px;
     }
+      .noImg {
+        visibility: hidden;
+      }
+
     .messageTextContainer {
       border-radius: 20px;
       padding: 10px 15px 5px 15px;
@@ -61,4 +65,8 @@
 
 .own {
   align-items: flex-end;
+
+  .messageTop {
+    flex-direction: row-reverse;
+  }
 }

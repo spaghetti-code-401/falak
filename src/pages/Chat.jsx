@@ -142,12 +142,13 @@ export default function Chat() {
         {currentConversation ? (
           <div className={`messagesContainer ${glass}`}>
             <div className="chatTop">
-              {messages.map((m) => (
+              {messages.map((m, i) => (
                 <div key={m._id + `${Math.random()}`} ref={scrollRef}>
                   <Message
                     message={m}
                     own={m.sender === user._id ? true : false}
                     chattingFriend={chattingFriend}
+                    noImg={(i && m.sender === messages[i-1].sender) ? 'noImg' : ''}
                   />
                 </div>
               ))}
