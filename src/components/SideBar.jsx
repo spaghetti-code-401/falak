@@ -33,7 +33,7 @@ export default function SideBar({ user }) {
       }
     };
     getFriends();
-  }, [currentUser._id, user]);
+  }, [API, currentUser._id, user]);
 
   const handleFollow = async (e) => {
     try {
