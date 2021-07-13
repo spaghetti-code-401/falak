@@ -11,11 +11,12 @@ is a social media appllication with a lovely style
 
 ## DB Schemas 
 1. Conversation 
-
 ![](./public/images/schema/conversation.png)
+
 2. Message 
 
 ![](./public/images/schema/message.png)
+
 3. Post 
 ![](./public/images/schema/post.png)
 
