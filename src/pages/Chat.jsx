@@ -132,7 +132,7 @@ export default function Chat() {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({
-      behavior: 'smooth'
+      // behavior: 'smooth'
     });
   }, [messages]);
 
@@ -159,7 +159,7 @@ export default function Chat() {
         </button>
         <div className="chatTop">
           {messages.map((m, i) => (
-            <div key={m._id + `${Math.random()}`} ref={scrollRef}>
+            <div key={m._id + `${Math.random()}`}>
               <Message
                 message={m}
                 own={m.sender === user._id ? true : false}
@@ -168,6 +168,7 @@ export default function Chat() {
               />
             </div>
           ))}
+          <div className="scrollIntoView" ref={scrollRef} style={{all: 'unset'}}></div>
         </div>
         <form onSubmit={handleSubmit} className="chatForm">
           <input
