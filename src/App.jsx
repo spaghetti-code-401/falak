@@ -19,15 +19,14 @@ import Background from './components/Background';
 import { useTheme } from './context/ThemeContext';
 import Chat from './pages/Chat';
 import { useAuth } from './context/AuthContext';
+import NotFound from './pages/NotFound';
 
 function App() {
   const { background } = useTheme();
-  const {user} = useAuth()
+  const { user } = useAuth();
   return (
     <>
-      <div className={background}>
-
-      </div>
+      <div className={background}></div>
       <Background />
       <Router>
         <Switch>
@@ -37,14 +36,17 @@ function App() {
           <Route exact path="/signin">
             {user ? <Redirect to="/" /> : <SignIn />}
           </Route>
-          <Route exact path='/signup'>
-          {user ? <Redirect to="/" /> : <SignUp />}
+          <Route exact path="/signup">
+            {user ? <Redirect to="/" /> : <SignUp />}
           </Route>
           <Route exact path="/profile/:username">
-          {user ? <Profile /> : <Redirect to="/signin" />}
+            {user ? <Profile /> : <Redirect to="/signin" />}
           </Route>
           <Route exact path="/chat">
-          {user ? <Chat /> : <Redirect to="/signin" />}
+            {user ? <Chat /> : <Redirect to="/signin" />}
+          </Route>
+          <Route path="/*">
+            <NotFound />
           </Route>
         </Switch>
       </Router>
