@@ -24,7 +24,7 @@ export default function Background() {
   return (
     <div className="canvasContainer">
       <Canvas>
-        <PerspectiveCamera position={[0, 0, 0]} rotation={[0, 0, rotationZ]}>
+        <PerspectiveCamera position={[0, 0, 0]} rotation={[rotationZ, rotationZ, 0]}>
           {/* <Sky inclination={0.505} /> */}
           <Stars factor={2.5} />
         </PerspectiveCamera>
