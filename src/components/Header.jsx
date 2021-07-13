@@ -24,10 +24,10 @@ export const Header = () => {
   const PF = usePF();
 
   const handleLogout = () => {
-    localStorage.setItem('socialUser', null)
+    localStorage.setItem('socialUser', null);
 
-    window.location.reload()
-  }
+    window.location.reload();
+  };
 
   const handleSetTheme = () => {
     glass === 'glass' ? setGlass('glassLight') : setGlass('glass');
@@ -63,14 +63,20 @@ export const Header = () => {
         <Link to="/chat">
           <TextsmsIcon className={`messageIcon ${lightText}`} />
         </Link>
-        <p onClick={handleLogout} className={`logout ${lightText}`}>Logout</p>
+        <p onClick={handleLogout} className={`logout ${lightText}`}>
+          Logout
+        </p>
         <p className={`setTheme ${lightText}`} onClick={handleSetTheme}>
           setTheme
         </p>
         {/* <AccountCircleIcon className="avatarIcon" /> */}
         <Link to={`/profile/${user.username}`}>
           <img
-            src={PF + user.profilePicture}
+            src={
+              user.profilePicture
+                ? PF + user.profilePicture
+                : PF + 'person/noAvatar.png'
+            }
             alt=""
             className="headerUserImage"
           />
