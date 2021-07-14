@@ -1,10 +1,11 @@
 # Falak 
-is a social media platform for develops with a lovely style
+
+Falak is a platform where programmers can share their thoughts 💡, bugs 🐛 and lack of sleep 😪
 
 ## Group Members 
-+ Ali Sartawi
-+ Ahmed Abuyahya 
-+ Qais Ata 
++ [Ali Sartawi](https://github.com/AliBakerSartawi)
++ [Ahmed Abuyahya](https://github.com/AhmadAbuyahya) 
++ [Qais Ata](https://github.com/qaisw96) 
 
 ## UML diagram
 ![](./public/images/uml.png)
@@ -27,7 +28,9 @@ is a social media platform for develops with a lovely style
 ![](./public/images/schema/user.png)
 
 ## Features & Routes
-1. Backend ::
+
+1. Backend 
+
 ### Authentication
 Method | Endpoint | Description 
 -------| ---------|-------------
@@ -59,7 +62,7 @@ Method | Endpoint | Description
 ### Conversations
 Method | Endpoint | Description 
 -------| ---------|-------------
-get | api/conversations/:userId | get conversation of a user
+get | api/conversations/:userId | get conversations of a user
 get | api/conversations/find/:firstUserId/:secondUserId | get conversation that includes 2 userIds
 post | api/conversations | to start a new conversation  
 
@@ -67,23 +70,23 @@ post | api/conversations | to start a new conversation
 ### Messages
 Method | Endpoint | Description 
 -------| ---------|-------------
-get | api/conversation | add a message
-post | api/conversation/:conversationId | get a message 
+post | api/messages | add a message
+get | api/messages/:conversationId | get messages of a conversation 
 
 2. Front-end Dom Routes 
 
 route | page 
 ------| ------
  ``/ `` | home page 
- `` /signin `` | log in page 
+ `` /signin `` | sign in page 
  `` /signup ``  | sign up page 
- `` /profile/:usernam `` | profile page 
+ `` /profile/:username `` | profile page 
  `` /chat `` | chat page 
 
 # Technologies 
 ![](./public/images/tools02.gif)
 
-## Other Tec and Tools :
+## Other Tools
 + axios
 + material-ui
 + timeago.js
