@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import './signin_signup.scss';
-import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { LoginStart, LoginSuccess, LoginFailure } from '../context/AuthActions';
 import axios from 'axios';

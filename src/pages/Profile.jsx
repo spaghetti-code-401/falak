@@ -1,10 +1,7 @@
-import Home from './Home';
 import Header from '../components/Header';
 import Feed from '../components/Feed';
-import Post from '../components/Post';
 
 import './profile.scss';
-import Share from '../components/Share';
 import SideBar from '../components/SideBar';
 import usePF from '../hooks/usePF';
 import { useState } from 'react';
