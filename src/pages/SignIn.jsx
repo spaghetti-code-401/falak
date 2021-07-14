@@ -39,6 +39,30 @@ export default function SignIn() {
     }
   };
 
+  const handleGuest=()=>{
+    const loginCall = async (userCredentials, dispatch) => {
+      dispatch(LoginStart);
+      try {
+        const res = await axios.post(
+          `${API}auth/login`,
+          userCredentials
+        );
+        dispatch(LoginSuccess(res.data));
+      } catch (err) {
+        dispatch(LoginFailure(err));
+      }
+    };
+    try {
+      loginCall(
+        { email: 'someonee@something.noscom', password: 'passwordouss' },
+        dispatch
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+
   return (
     <div className="signIn">
       <div className="signInWrapper glass">
@@ -73,15 +97,18 @@ export default function SignIn() {
             </button>
           </form>
           <p className="loginOr">or</p>
-
-          <Link to="/signup" className="signupButtonWrapper">
+            <Link to="/signup" className="signupButtonWrapper">
+              <button
+                className="newAccountButton glass2">
+                Create a new account
+              </button>
+            </Link>
+          <p className="loginOrMaybe">or maybe even</p>
             <button
-              // variant="contained"
-              // color="secondary"
-              className="newAccountButton glass2">
-              Create a new account
+              onClick={handleGuest}
+              className="guestAccountButton glassGreen">
+              Use a guest account
             </button>
-          </Link>
         </div>
       </div>
     </div>
