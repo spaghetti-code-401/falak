@@ -110,7 +110,19 @@ body {
   // backdrop-filter: blur(0.01rem) saturate(200%);
   // -webkit-backdrop-filter: blur(0.01rem) saturate(200%);
 }
-
+.glassGreen {
+  /* from top left, to bottom right */
+  background: linear-gradient(
+    to right bottom,
+    rgba(40, 240, 22, 0.3),
+    rgba(40, 240, 22, 0.1),
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.3);
+  /* the magic words */
+  // backdrop-filter: blur(0.01rem) saturate(200%);
+  // -webkit-backdrop-filter: blur(0.01rem) saturate(200%);
+}
 /////////////// light theme
 .glassLight {
   /* from top left, to bottom right */
