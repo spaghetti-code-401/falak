@@ -4,15 +4,18 @@ import App from './App';
 import ThemeProvider from './context/ThemeContext';
 import AuthProvider from './context/AuthContext';
 import SocketProvider from './context/SocketContext';
+import ChatProvider from './context/ChatContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      {/* <SocketProvider> */}
+      <ChatProvider>
+        {/* <SocketProvider> */}
         <ThemeProvider>
           <App />
         </ThemeProvider>
-      {/* </SocketProvider> */}
+        {/* </SocketProvider> */}
+      </ChatProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')

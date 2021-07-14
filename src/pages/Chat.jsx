@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Message from '../components/Message';
+import ChatBox from '../components/ChatBox';
 import ChatSideBar from '../components/ChatSideBar';
 import './chat.scss';
 import { useSocket } from '../context/SocketContext';
@@ -8,7 +9,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import axios from 'axios';
 import useAPI from '../hooks/useAPI';
-import '../components/chatForm.scss';
+// import '../components/chatForm.scss';
 import '../components/chatTop.scss';
 import '../components/message.scss';
 import { io } from 'socket.io-client';
@@ -18,24 +19,48 @@ import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-dracula';
 
 import ConsoleComponent from '../components/Console';
+import { useChat } from '../context/ChatContext';
 
 export default function Chat() {
   const { glass2, lightText, glass } = useTheme();
   const API = useAPI();
   const { user } = useAuth();
-  const newMessage = useRef();
+  // const newMessage = useRef();
   const scrollRef = useRef();
   const socket = useRef();
 
-  const [onlineUsers, setOnlineUsers] = useState([]);
-  const [conversations, setConversations] = useState([]);
-  const [currentConversation, setCurrentConversation] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [arrivalMessage, setArrivalMessage] = useState([]);
-  const [chattingFriend, setChattingFriend] = useState(null);
-  const [showEditor, setShowEditor] = useState(false);
-  const [userCode, setUserCode] = useState('');
-  const [userCodeIncoming, setUserCodeIncoming] = useState('');
+  // const [onlineUsers, setOnlineUsers] = useState([]);
+  // const [conversations, setConversations] = useState([]);
+  // const [currentConversation, setCurrentConversation] = useState(null);
+  // const [messages, setMessages] = useState([]);
+  // const [arrivalMessage, setArrivalMessage] = useState([]);
+  // const [chattingFriend, setChattingFriend] = useState(null);
+  // const [showEditor, setShowEditor] = useState(false);
+  // const [userCode, setUserCode] = useState('');
+  // const [userCodeIncoming, setUserCodeIncoming] = useState('');
+
+  const {
+    onlineUsers,
+    setOnlineUsers,
+    conversations,
+    setConversations,
+    currentConversation,
+    setCurrentConversation,
+    messages,
+    setMessages,
+    arrivalMessage,
+    setArrivalMessage,
+    newMessage,
+    setNewMessage,
+    chattingFriend,
+    setChattingFriend,
+    showEditor,
+    setShowEditor,
+    userCode,
+    setUserCode,
+    userCodeIncoming,
+    setUserCodeIncoming
+  } = useChat();
 
   useEffect(() => {
     socket.current = io('https://falak-socket.herokuapp.com/');
@@ -54,7 +79,7 @@ export default function Chat() {
       //   setUserCodeIncoming(data.text);
       setUserCode(data.text);
       setUserCodeIncoming(data.text);
-      console.log('RECEIVED')
+      console.log('RECEIVED');
     });
     // console.log('IN CHAT COMPONENT');
   }, []);
@@ -76,40 +101,40 @@ export default function Chat() {
   }, [socket, user._id, user.following]);
 
   // handle submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    if (!newMessage.current.value) return;
-    const message = {
-      sender: user._id,
-      text: newMessage.current.value,
-      conversationId: currentConversation._id
-    };
+  //   if (!newMessage) return;
+  //   const message = {
+  //     sender: user._id,
+  //     text: newMessage,
+  //     conversationId: currentConversation._id
+  //   };
 
-    const receiverId = currentConversation.members.find(
-      (member) => member !== user._id
-    );
+  //   const receiverId = currentConversation.members.find(
+  //     (member) => member !== user._id
+  //   );
 
-    try {
-      socket.current.emit('sendMessage', {
-        senderId: user._id,
-        receiverId: receiverId,
-        text: newMessage.current.value
-      });
-    } catch (err) {
-      console.log(err);
-    }
+  //   try {
+  //     socket.current.emit('sendMessage', {
+  //       senderId: user._id,
+  //       receiverId: receiverId,
+  //       text: newMessage
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
 
-    try {
-      const res = await axios.post(`${API}messages`, message);
-      setMessages([...messages, res.data]);
-      e.target.reset();
-    } catch (e) {
-      console.log(e);
-    }
+  //   try {
+  //     const res = await axios.post(`${API}messages`, message);
+  //     setMessages([...messages, res.data]);
+  //     e.target.reset();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
 
-    newMessage.current.focus()
-  };
+  //   // newMessage.current.focus()
+  // };
 
   useEffect(() => {
     const getConversations = async () => {
@@ -138,12 +163,6 @@ export default function Chat() {
   }, [API, currentConversation]);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({
-      // behavior: 'smooth'
-    });
-  }, [messages]);
-
-  useEffect(() => {
     const friendId = currentConversation?.members.find((m) => m !== user._id);
     const fetchFriendData = async () => {
       try {
@@ -155,44 +174,6 @@ export default function Chat() {
     };
     fetchFriendData();
   }, [API, currentConversation?.members, user._id]);
-
-  function ChatBox() {
-    return (
-      <div className={`messagesContainer ${glass}`}>
-        <button
-          onClick={() => setShowEditor(true)}
-          className={`openCodeEditorButton ${lightText} ${glass2}`}>
-          Open code editor
-        </button>
-        <div className="chatTop">
-          {messages.map((m, i) => (
-            <div key={m._id + `${Math.random()}`}>
-              <Message
-              
-                message={m}
-                own={m.sender === user._id ? true : false}
-                chattingFriend={chattingFriend}
-                noImg={i && m.sender === messages[i - 1].sender ? 'noImg' : ''}
-              />
-            </div>
-          ))}
-          <div
-            className="scrollIntoView"
-            ref={scrollRef}
-            style={{ all: 'unset' }}></div>
-        </div>
-        <form onSubmit={handleSubmit} className="chatForm">
-          <input
-            ref={newMessage}
-            placeholder="Write Something"
-            type="text"
-            className={`chatInput ${lightText} ${glass2}`}
-          />
-          <button className={`chatButton ${lightText} ${glass2}`}>Send</button>
-        </form>
-      </div>
-    );
-  }
 
   function CodeEditor() {
     const [renderConsole, setRenderConsole] = useState(false);
@@ -228,18 +209,6 @@ export default function Chat() {
         setRenderConsole(true);
       }, 10);
     }
-
-    // useEffect(() => {
-    //   try {
-    //     socket.current.emit('sendCode', {
-    //       senderId: user._id,
-    //       receiverId: chattingFriend._id,
-    //       text: userCode
-    //     })
-    //   } catch (e) {
-    //     console.log(e)
-    //   }
-    // }, [userCode])
 
     return (
       <div className={`aceEditorContainer ${glass}`}>
@@ -314,7 +283,10 @@ export default function Chat() {
       <Header />
       <div className="chatContainer">
         {currentConversation && !showEditor ? (
-          <ChatBox />
+          <ChatBox
+          socket={socket}
+          // handleSubmit={handleSubmit}
+          />
         ) : currentConversation && showEditor ? (
           <CodeEditor />
         ) : (
