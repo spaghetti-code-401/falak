@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import './signin_signup.scss';
-import { Button, TextField } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useAPI from '../hooks/useAPI';

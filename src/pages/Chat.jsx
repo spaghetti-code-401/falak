@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Header from '../components/Header';
-import Message from '../components/Message';
 import ChatBox from '../components/ChatBox';
 import ChatSideBar from '../components/ChatSideBar';
 import './chat.scss';
@@ -15,7 +14,6 @@ import { io } from 'socket.io-client';
 
 
 
-import ConsoleComponent from '../components/Console';
 import { useChat } from '../context/ChatContext';
 import CodeEditor from '../components/CodeEditor';
 
