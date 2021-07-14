@@ -39,7 +39,7 @@ export default function SignUp() {
 
   return (
     <div className="signIn">
-      <div className="signInWrapper glass">
+      <div className="signUpWrapper glass">
         <div className="signInLeft">
           <h1>falak</h1>
           <p>Share your thoughts 💡, bugs 🐛 and lack of sleep 😪</p>
