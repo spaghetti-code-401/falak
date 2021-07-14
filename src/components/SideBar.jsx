@@ -9,7 +9,7 @@ import { Add, Remove } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import useAPI from '../hooks/useAPI';
 
-export default function SideBar({ user }) {
+export default function SideBar({ user, onlineUsers }) {
   const { glass, glass2, lightText } = useTheme();
   const PF = usePF();
   const [friends, setFriends] = useState([]);
@@ -55,17 +55,17 @@ export default function SideBar({ user }) {
   };
 
   function HomeSidebar() {
-    console.log(friends);
+    // console.log(friends);
     return (
       <>
         <h4 className={`sidebarTitle ${lightText}`}>Online Friends</h4>
-        {!friends.length && (
+        {!onlineUsers?.length && (
           <p className={`sidebarNoFriendsHome ${lightText}`}>
             It's lonely in here 😢
           </p>
         )}
         <div className="sidebarFriendList">
-            {/* <OnlineFriends onlineUsers={friends} /> */}
+            {/* <OnlineFriends onlineUsers={onlineUsers} /> */}
         </div>
       </>
     );

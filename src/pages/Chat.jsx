@@ -107,6 +107,8 @@ export default function Chat() {
     } catch (e) {
       console.log(e);
     }
+
+    newMessage.current.focus()
   };
 
   useEffect(() => {
