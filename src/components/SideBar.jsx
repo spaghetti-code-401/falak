@@ -58,51 +58,6 @@ export default function SideBar({ user, onlineUsers }) {
     // console.log(friends);
     return (
       <>
-        <h4 className={`sidebarTitle ${lightText}`}>Online Friends</h4>
-        {!onlineUsers?.length && (
-          <p className={`sidebarNoFriendsHome ${lightText}`}>
-            It's lonely in here 😢
-          </p>
-        )}
-        <div className="sidebarFriendList">
-            {/* <OnlineFriends onlineUsers={onlineUsers} /> */}
-        </div>
-      </>
-    );
-  }
-
-  function ProfileSidebar() {
-    return (
-      <>
-        {user.username !== currentUser.username && (
-          <button
-            className={`sidebarFollowButton ${glass2} ${lightText}`}
-            onClick={handleFollow}>
-            {followed ? 'Unfollow' : 'Follow'}
-            {followed ? <Remove /> : <Add />}
-          </button>
-        )}
-        {/* <h4 className="sidebarTitle">User Info</h4>
-        <div className="sidebarInfo">
-          <div className="sidebarInfoItem">
-            <p className="sidebarInfoKey">City: </p>
-            <p className="sidebarInfoValue">{user.city}</p>
-          </div>
-          <div className="sidebarInfoItem">
-            <p className="sidebarInfoKey">From: </p>
-            <p className="sidebarInfoValue">{user.from}</p>
-          </div>
-          <div className="sidebarInfoItem">
-            <p className="sidebarInfoKey">Relationship: </p>
-            <p className="sidebarInfoValue">
-              {user.relationship === 1
-                ? 'Single'
-                : user.relationship === 2
-                ? 'In a relationship'
-                : 'Complicated'}
-            </p>
-          </div>
-        </div> */}
         <h4 className={`sidebarTitle ${lightText}`}>Following</h4>
         {!friends.length && (
           <p className={`sidebarNoFriends ${lightText}`}>
@@ -125,7 +80,54 @@ export default function SideBar({ user, onlineUsers }) {
                   alt=""
                   className="sidebarFollowingImg"
                 />
-                <p className={`sidebarFollowingName ${lightText}`}>{f.username}</p>
+                <p className={`sidebarFollowingName ${lightText}`}>
+                  {f.username}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </>
+    );
+  }
+
+  function ProfileSidebar() {
+    return (
+      <>
+        {user.username !== currentUser.username && (
+          <button
+            className={`sidebarFollowButton ${glass2} ${lightText}`}
+            onClick={handleFollow}>
+            {followed ? 'Unfollow' : 'Follow'}
+            {followed ? <Remove /> : <Add />}
+          </button>
+        )}
+
+        <h4 className={`sidebarTitle ${lightText}`}>Following</h4>
+        {!friends.length && (
+          <p className={`sidebarNoFriends ${lightText}`}>
+            It's lonely in here 😢
+          </p>
+        )}
+        <div className="sidebarFollowing">
+          {friends.map((f) => (
+            <Link
+              key={f._id}
+              to={`/profile/${f.username}`}
+              style={{ textDecoration: 'none' }}>
+              <div className="sidebarFollowingPerson">
+                <img
+                  src={
+                    f.profilePicture
+                      ? PF + f.profilePicture
+                      : PF + 'person/noAvatar.png'
+                  }
+                  alt=""
+                  className="sidebarFollowingImg"
+                />
+                <p className={`sidebarFollowingName ${lightText}`}>
+                  {f.username}
+                </p>
               </div>
             </Link>
           ))}
