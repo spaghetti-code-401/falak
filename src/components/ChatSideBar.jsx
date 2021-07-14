@@ -14,7 +14,10 @@ export default function ChatSideBar({
     <div className={`chatSideBar ${glass}`}>
       <div className="onlineFriendsContainer">
         <h3 className={`onlineFriendsHeader ${lightText}`}>Online Friends</h3>
-        <OnlineFriends onlineUsers={onlineUsers} />
+        <OnlineFriends
+          setCurrentConversation={setCurrentConversation}
+          onlineUsers={onlineUsers}
+        />
       </div>
       <hr className="chatSidebarHr" />
       <div className="conversationsContainer">

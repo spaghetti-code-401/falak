@@ -65,9 +65,7 @@ export default function SideBar({ user }) {
           </p>
         )}
         <div className="sidebarFriendList">
-          {friends.map((f) => (
-            <OnlineFriends key={f._id} user={f} />
-          ))}
+            {/* <OnlineFriends onlineUsers={friends} /> */}
         </div>
       </>
     );
