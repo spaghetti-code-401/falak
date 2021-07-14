@@ -9,6 +9,8 @@ export default function ThemeProvider({ children }) {
   const [glass2, setGlass2] = useState('glass2');
   const [lightText, setLightText] = useState('');
   const [background, setBackground] = useState('background');
+  const [isDarkMode, setIsDarkMode] = useState(() => true);
+  const [onLoad, setOnLoad] = useState(true);
 
   return (
     <ThemeContext.Provider
@@ -20,7 +22,11 @@ export default function ThemeProvider({ children }) {
         lightText,
         setLightText,
         background,
-        setBackground
+        setBackground,
+        isDarkMode, 
+        setIsDarkMode,
+        onLoad, 
+        setOnLoad
       }}>
       {children}
     </ThemeContext.Provider>

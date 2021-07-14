@@ -7,12 +7,12 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import usePF from '../hooks/usePF';
 import { Link } from 'react-router-dom';
-import DarkModeToggle from "react-dark-mode-toggle";
+import DarkModeToggle from 'react-dark-mode-toggle';
 import { useEffect } from 'react';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export const Header = () => {
-  const [isDarkMode, setIsDarkMode] = useState(() => true);
+  // const [isDarkMode, setIsDarkMode] = useState(() => true);
   const [onLoad, setOnLoad] = useState(true);
 
   const { user } = useAuth();
@@ -24,7 +24,11 @@ export const Header = () => {
     lightText,
     setLightText,
     background,
-    setBackground
+    setBackground,
+    isDarkMode,
+    setIsDarkMode,
+    // onLoad,
+    // setOnLoad
   } = useTheme();
   const PF = usePF();
 
@@ -41,10 +45,9 @@ export const Header = () => {
       background === 'background'
         ? setBackground('backgroundLight')
         : setBackground('background');
-
     }
-    setOnLoad(false)
-  }, [isDarkMode])
+    setOnLoad(false);
+  }, [isDarkMode]);
 
   // const handleSetTheme = () => {
   //   glass === 'glass' ? setGlass('glassLight') : setGlass('glass');
@@ -88,11 +91,15 @@ export const Header = () => {
           <p className={lightText}>Chat</p>
         </div>
         <div className="headerIconContainer">
-          <ExitToAppIcon onClick={handleLogout} className={`logout ${lightText}`} />
+          <ExitToAppIcon
+            onClick={handleLogout}
+            className={`logout ${lightText}`}
+          />
           <p className={lightText}>Logout</p>
         </div>
         <div className="headerIconContainer">
-          <DarkModeToggle className='themeSwitch'
+          <DarkModeToggle
+            className="themeSwitch"
             onChange={setIsDarkMode}
             checked={isDarkMode}
             size={40}

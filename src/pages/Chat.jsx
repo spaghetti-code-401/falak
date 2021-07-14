@@ -22,17 +22,17 @@ import ConsoleComponent from '../components/Console';
 export default function Chat() {
   const { glass2, lightText, glass } = useTheme();
   const API = useAPI();
+  const { user } = useAuth();
+  const newMessage = useRef();
+  const scrollRef = useRef();
+  const socket = useRef();
 
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [conversations, setConversations] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
   const [messages, setMessages] = useState([]);
-  const newMessage = useRef();
   const [arrivalMessage, setArrivalMessage] = useState([]);
-  const scrollRef = useRef();
-  const { user } = useAuth();
   const [chattingFriend, setChattingFriend] = useState(null);
-  const socket = useRef();
   const [showEditor, setShowEditor] = useState(false);
   const [userCode, setUserCode] = useState('');
   const [userCodeIncoming, setUserCodeIncoming] = useState('');
@@ -168,6 +168,7 @@ export default function Chat() {
           {messages.map((m, i) => (
             <div key={m._id + `${Math.random()}`}>
               <Message
+              
                 message={m}
                 own={m.sender === user._id ? true : false}
                 chattingFriend={chattingFriend}
