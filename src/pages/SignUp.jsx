@@ -11,7 +11,7 @@ export default function SignUp() {
   const password = useRef();
   const passwordAgain = useRef();
   const history = useHistory();
-  const API = useAPI()
+  const API = useAPI();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,48 +25,43 @@ export default function SignUp() {
         password: password.current.value
       };
       try {
-        await axios.post(
-          `${API}auth/register`,
-          user
-        );
+        await axios.post(`${API}auth/register`, user);
         // on successful sign up, redirect to sign in
-        history.push('/signin')
+        history.push('/signin');
       } catch (err) {
         console.log(err);
       }
     }
   };
 
-  console.log(password)
-  console.log(passwordAgain)
+  console.log(password);
+  console.log(passwordAgain);
 
   return (
     <div className="signIn">
       <div className="signInWrapper glass">
         <div className="signInLeft">
           <h1>falak</h1>
-          <p>
-            Are you ready for who knows what?
-          </p>
+          <p>Share your thoughts 💡, bugs 🐛 and lack of sleep 😪</p>
         </div>
         <div className="signInRight glass2">
           <form className="form" onSubmit={handleSubmit}>
             <input
-            ref={username}
+              ref={username}
               placeholder="Username"
               className="input glass2"
               type="text"
               required
             />
             <input
-            ref={email}
+              ref={email}
               required
               placeholder="Email"
               className="input glass2"
               type="email"
             />
             <input
-            ref={password}
+              ref={password}
               required
               placeholder="Password"
               className="input glass2"
@@ -74,7 +69,7 @@ export default function SignUp() {
               minLength="8"
             />
             <input
-            ref={passwordAgain}
+              ref={passwordAgain}
               required
               placeholder="Password Again"
               className="input glass2"

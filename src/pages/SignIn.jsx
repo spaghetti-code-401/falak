@@ -10,7 +10,7 @@ import useAPI from '../hooks/useAPI';
 export default function SignIn() {
   const email = useRef();
   const password = useRef();
-  const API = useAPI()
+  const API = useAPI();
 
   const { user, isFetching, error, dispatch } = useAuth();
 
@@ -20,10 +20,7 @@ export default function SignIn() {
       dispatch(LoginStart);
 
       try {
-        const res = await axios.post(
-          `${API}auth/login`,
-          userCredentials
-        );
+        const res = await axios.post(`${API}auth/login`, userCredentials);
         dispatch(LoginSuccess(res.data));
       } catch (err) {
         dispatch(LoginFailure(err));
@@ -44,9 +41,7 @@ export default function SignIn() {
       <div className="signInWrapper glass">
         <div className="signInLeft">
           <h1>falak</h1>
-          <p>
-            Are you ready for who knows what?
-          </p>
+          <p>Share your thoughts 💡, bugs 🐛 and lack of sleep 😪</p>
         </div>
         <div className="signInRight glass2">
           <form className="form" onSubmit={handleSubmit}>
