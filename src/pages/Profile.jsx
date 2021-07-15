@@ -69,7 +69,7 @@ const Profile = (props) => {
                   ? 'Single'
                   : user?.relationship === 2
                   ? 'Married'
-                  : 'Complicated'}
+                  : '-'}
               </p>
             </div>
           </section>
